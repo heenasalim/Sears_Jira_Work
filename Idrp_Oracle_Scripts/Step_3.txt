@@ -1,0 +1,35 @@
+select count(1) from STSC.UDT_DATA_INTG_RPT051619;                              --733191 
+
+
+SQL> select count(1) from STSC.UDT_DATA_INTG_RPT051619;
+
+
+  COUNT(1)
+----------
+    733191
+
+
+
+select count(1) from STSC.UDT_DATA_INTG_RPT051619
+where (ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT )not 
+in(select ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT from STSC.UDT_DATA_INTG_RPT_051619_1);         --733147
+
+
+  COUNT(1)
+----------
+    733147
+
+
+
+INSERT /*+ parallel(x,12) */
+  INTO STSC.UDT_DATA_INTG_RPT x
+  select * from STSC.UDT_DATA_INTG_RPT051619  
+where (ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT )not 
+in(select ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT from STSC.UDT_DATA_INTG_RPT_051619_1);
+
+--count should be same  733147 than commit;
+
+
+commit;
+
+733147 rows created.

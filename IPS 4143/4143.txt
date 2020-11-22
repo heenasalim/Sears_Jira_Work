@@ -1,0 +1,112 @@
+100 jobs failed last year due to no space left on device at enterprise level as idrp logs were consuming whole space.
+I have manually removed the space and batch execution came to normal .
+
+This change will save 100 of incidents per year.
+
+you can CLOSE this jira
+
+
+
+gold__inventory_sears_dc_item_due_in_current
+
+3rd column  loc=udt_source=dos_warehouse_nbr  0442
+Item record= 
+6th column  sears_division_nbr   020
+7th column  sears_item_nbr       32140
+8th column  dos_sku_cd           000
+
+	
+work__idrp_srs_schedrcpt 
+/gold/inventory/dc/sears_item_due_in/current
+
+
+
+select * from  gold__inventory_sears_dc_item_due_in_current  where udc_source like '%442%' and udc_ord_no like '%32140%';
+
+
+Executing pig script with arguments -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_4 -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_rp.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param /appl/hdidrp/pig/scripts/shared/multi_instance_error_file_generic.pig
+Executing pig script with arguments -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_4 -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_cr.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param /appl/hdidrp/pig/scripts/shared/multi_instance_error_file_generic.pig
+Executing pig script with arguments -p filter_left_cdc=\'P' -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_4 -p error_path=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_error_RP -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_rp.schema /appl/hdidrp/pig/scripts/shared/multi_instance_generic.pig
+Executing pig script with arguments -p filter_left_cdc=\'P' -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_4 -p error_path=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_error -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_cr.schema /appl/hdidrp/pig/scripts/shared/multi_instance_generic.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/Error_Handling_Generic_CR.param /appl/hdidrp/pig/scripts/shared/Error_Handling_Generic.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonReplenishmentTransformation.param -m /appl/hdidrp/pig/schema/smith__idrp_order_source_exclusions_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_sku.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/work__idrp_onorder_rp_kmart_harmonized_layout_cr.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonReplenishmentTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.param -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_dc_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_dc.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.param -m /appl/hdidrp/pig/schema/gold__item_kmart_ksn_dc_package.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO_LN.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.pigExecuting pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToStoreTransformation.param -m /appl/hdidrp/pig/schema/gold__item_ksn_collection.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_PO_LN.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_PO_LN_ASRT_MBR.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToStoreTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.param -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_dc_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_dc.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartReceiptsPlanningTransformation.param -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/work__idrp_onorder_rp_kmart_harmonized_layout_rp.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartReceiptsPlanningTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartDCToStoreTransformation.param -m /appl/hdidrp/pig/schema/gold__item_ksn_collection.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/smith__cosmos_ordmgmt_current_dw_po_ln.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DW_PO_LN.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DW_ASRT_MBR.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartDCToStoreTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.param -m /appl/hdidrp/pig/schema/gold__item_kmart_ksn_dc_package.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO_LN.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.pig
+
+
+Executing pig script with arguments -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_error_rp/instance_4 -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_rp.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param /appl/hdidrp/pig/scripts/shared/multi_instance_error_file_generic.pig
+Executing pig script with arguments -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_error/instance_4 -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_cr.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param /appl/hdidrp/pig/scripts/shared/multi_instance_error_file_generic.pig
+Executing pig script with arguments -p filter_left_cdc=\'P' -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid_rp/instance_4 -p error_path=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_error_RP -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_rp.schema /appl/hdidrp/pig/scripts/shared/multi_instance_generic.pig
+Executing pig script with arguments -p filter_left_cdc=\'P' -p Inst_01=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_1 -p Inst_02=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_2 -p Inst_03=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_3 -p Inst_04=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_4 -p error_path=/work/idrp/on_order_sync_rp/kmart/multiinstance_valid/instance_error -m /appl/hdidrp/pig/schema/smith__idrp_item_instance.schema -param_file /appl/hdidrp/pig/params/shared//multi_instance_generic.param -param_file /appl/hdidrp/pig/schema/pig_on_order_sync_rp_kmart_multiinstance_cr.schema /appl/hdidrp/pig/scripts/shared/multi_instance_generic.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/Error_Handling_Generic_CR.param /appl/hdidrp/pig/scripts/shared/Error_Handling_Generic.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonReplenishmentTransformation.param -m /appl/hdidrp/pig/schema/smith__idrp_order_source_exclusions_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_sku.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/work__idrp_onorder_rp_kmart_harmonized_layout_cr.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonReplenishmentTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/Error_Handling_Generic_RP.param /appl/hdidrp/pig/scripts/shared/Error_Handling_Generic.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartReceiptsPlanningTransformation.param -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/work__idrp_onorder_rp_kmart_harmonized_layout_rp.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartReceiptsPlanningTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.param -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_dc_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_store.schema -m /appl/hdidrp/pig/schema/work__idrp_oo_rp_kmart_vend_to_dc.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartDCToStoreTransformation.param -m /appl/hdidrp/pig/schema/gold__item_ksn_collection.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/smith__cosmos_ordmgmt_current_dw_po_ln.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DW_PO_LN.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DW_ASRT_MBR.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartDCToStoreTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.param -m /appl/hdidrp/pig/schema/gold__item_kmart_ksn_dc_package.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_DC_PO_LN.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.pig
+Executing pig script with arguments -m /appl/hdidrp/pig/params/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToStoreTransformation.param -m /appl/hdidrp/pig/schema/gold__item_ksn_collection.schema -m /appl/hdidrp/pig/schema/smith__item_hierarchy_combined_all_current.schema -m /appl/hdidrp/pig/schema/smith__idrp_batchdate.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_PO_LN.schema -m /appl/hdidrp/pig/schema/on_order_sync_rp/kmart/incoming__db2_RP_PO_LN_ASRT_MBR.schema /appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToStoreTransformation.pig
+
+
+create table work__idrp_srs_schedrcpt (expdate STRING,
+item STRING ,
+loc STRING ,
+qty STRING ,
+qtyreceived STRING ,
+scheddate STRING ,
+startdate STRING ,
+udc_cta_no STRING ,
+udc_due_in_dt STRING ,
+udc_fs_pct STRING ,
+udc_fs_qty STRING ,
+udc_imp_pack_qty STRING ,
+udc_imp_ready_dt STRING ,
+udc_imp_ref_no STRING ,
+udc_need_shp_dt	 STRING ,
+udc_ord_dt   STRING ,
+udc_ord_no STRING ,
+udc_ord_orig_dt STRING ,
+udc_ord_sen_fl STRING ,
+udc_ord_sys_cd STRING ,
+udc_org_qty STRING ,
+udc_orig_due_in_dt STRING ,
+udc_purch_stg STRING ,
+udc_rdcd_qty STRING ,
+udc_source STRING ,
+udc_splt_push_fl STRING ,
+udc_sply_typ STRING ,
+udc_vend_pack_id STRING ,
+batchid STRING )
+row format delimited 
+fields terminated by '|'
+location '/work/idrp/on_order_sync_rp/sears/loadready_onorder_cr';
+
+
+hadoop distcp hdfs://trphadn01//work/idrp/on_order_sync_rp/sears/loadready_onorder_cr  /work/idrp/on_order_sync_rp/sears/
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+./Pkj_Hadoop_Jda_OO_Sync_RP_Sears_CommonRplnsh_Master.log_20190826
+/appl/hdidrp/pig/scripts/on_order_sync_rp/sears/PerformOnOrderSyncRPSearsCommonReplenishmentTransformation.pig
+
+
+
+
+/appl/hdidrp/pig/scripts/shared/multi_instance_error_file_generic.pig
+/appl/hdidrp/pig/scripts/shared/multi_instance_generic.pig
+/appl/hdidrp/pig/scripts/shared/Error_Handling_Generic.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartReceiptsPlanningTransformation.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartCommonAllocationTransformation.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartDCToStoreTransformation.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToDCTransformation.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/kmart/PerformOnOrderSyncRPKmartVendorToStoreTransformation.pig
+/appl/hdidrp/pig/scripts/on_order_sync_rp/sears/work__idrp_rp_nros_dc_oo_extract.pig
+
+
+work__idrp_srs_schedrcpt
+

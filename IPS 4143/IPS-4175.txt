@@ -1,0 +1,135 @@
+
+
+Update stgmgr.job_event_activity
+set job_event_status_id = 1
+where batchctl_id in ('5920','5919','3234','3231','3226','3225','3222','3221','2003','1999','1771','1701','1525','1512','1511','1498','1497','1496','1495','1494','1493','1492','1491','1483','1477','1476','1469','1429','1428','1427','1422','1412','1396','1395','1393','1387','1382','1378','1374','1368','1317','1316','1295','1238','1211','1090','1089','1043','1041')
+and job_event_activity_id in ('4827','4831','4832','4833','4834','4835','4963','4967','4968','4969','4970','4971','4972','4976','4977','4978','4979','4980','5531','5535','5536','5537','5538','5539','5717','5721','5722','5723','5724','5725','6730','6734','6735','6736','6737','6738','6739','6743','6744','6745','6746','6747','7345','7352','7353','7354','7355','7356','7555','7559','7561','7562','7577','7578','7614','7618','7619','7620','7621','7622','7652','7658','7664','7670','7671','7672','7679','7683','7684','7685','7686','7687','7786','7790','7791','7792','7793','7794','7799','7803','7804','7805','7806','7807','7808','7812','7813','7814','7815','7816','7887','7891','7892','7893','7894','7895','8029','8033','8034','8035','8036','8037','8067','8071','8072','8073','8074','8075','8076','8080','8081','8082','8083','8084','8085','8089','8090','8091','8092','8093','8641','8645','8646','8647','8683','8687','8746','9058','9063','9067','9069','9070','9071','9075','9076','9077','9078','9079','9237','9241','9242','9245','9246','9247','9302','9307','9308','9318','9319','9320','9321','9325','9326','9327','9328','9329','9330','9334','9335','9336','9337','9338','9339','9343','9344','9345','9346','9347','9349','9353','9354','9355','9356','9357','9358','9362','9363','9364','9365','9366','9367','9371','9372','9373','9374','9375','9376','9380','9381','9382','9383','9384','9497','9501','9502','9503','9504','9505','9506','9510','9511','9512','9513','9514','9934','9938','9939','9940','9941','9942','10904','10908','10909','12306','12307','12308','13140','13144','13145','13146','13147','13148','15291','15298','15299','15300','15301','15302','15335','15339','15340','15344','15345','15346','25033','25037','25038','25039','25040','25041','25042','25046','25047','25048','25049','25052','25053','25057','25058','25059','25060','25061','25134','25138','25139','25140','25141','25142','25199','25203','25204','25205','25206','25207','32384','32395','32401','32409','32410','33421','33424','33428','33429','33430','33431','33432');
+
+
+
+PREVDATADIR=/work/idrp/LocAlloc/prev/part*
+BKUPDATADIR=/smith/idrp/archive/snapshot/LocAlloc/
+CURRDATADIR=/work/idrp/LocAlloc/curr*
+
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020/smith/idrp/archive/snapshot/LocAlloc/*  hdfs://trihadn01.hadoop.searshc.com:8020//smith/idrp/archive/snapshot/LocAlloc/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020/work/idrp/LocAlloc/prev/part*  hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/LocAlloc/prev/
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020/work/idrp/LocAlloc/error_file/*  hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/idrpnpc/work/idrp/LocAlloc/error_file/
+ 
+ 
+ 
+ 
+
+/appl/hdidrp/idrpnpc/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh LocAlloc Pkj_Hadoop_Jda_LocationAllocationsMaster.kjb /appl/conf/hdidrp/dev/
+
+
+https://ushofsvpsvn1.intra.searshc.com/svn/hadoop_repo/hadoop/hdidrp/devtags/DEV_2019-10-16_Kettle_Changes
+/hadoop/hdidrp/branches/trusted/hdp_r1_qa_b1/appl/hdidrp
+https://ushofsvpsvn1.intra.searshc.com/svn/hadoop_repo/hadoop/hdidrp/branches/trusted/hdp_r1_qa_b1/appl/hdidrp
+
+https://ushofsvpsvn1.intra.searshc.com/svn/hadoop_repo/hadoop/hdidrp/devtags/DEV_2019-10-16_Kettle_Changes
+https://ushofsvpsvn1.intra.searshc.com/svn/hadoop_repo/hadoop/hdidrp/devtags/DEV_2019-10-16_Kettle_Changes
+
+
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020/smith/marketing/impact/idrp_kmart/master_deal/current hdfs://trihadn01.hadoop.searshc.com:8020/smith/marketing/impact/idrp_kmart/master_deal/
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/master_deal/current   hdfs://trihadn01.hadoop.searshc.com:8020/smith/marketing/impact/idrp_kmart/master_deal
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current hdfs://trihadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/ksn_bogo_deal
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/activity_component/current hdfs://trihadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/activity_component
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/offer_product_group/current hdfs://trihadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/offer_product_group
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/offer_ksn_location/current hdfs://trihadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/offer_ksn_location/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//work/hdmkt/mkt/data_source/persist/SearsRollOut.dat hdfs://trihadn01.hadoop.searshc.com:8020//work/hdmkt/mkt/data_source/persist/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/ksn_simple_deal/current hdfs://trihadn01.hadoop.searshc.com:8020//smith/marketing/impact/idrp_kmart/ksn_simple_deal/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/idrp/promotion_hierarchy/sears hdfs://trihadn01.hadoop.searshc.com:8020//smith/idrp/promotion_hierarchy
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/idrp/collections_carton_pack_xref_current  hdfs://trihadn01.hadoop.searshc.com:8020//smith/idrp/
+
+ 
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/vend_to_store hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/dc_to_store hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/vendor_to_dc  hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears/vend_to_tpw  hdfs://trihadn01.hadoop.searshc.com:8020//work/idrp/on_order_sync_rp/sears
+
+
+ 
+ 
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//gold/inventory/store_stock_status/current /gold/idrp/inventory/store_stock_status/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/ordmgmt/current/ivnty_v3 /smith/ordmgmt/current/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//incoming/hdidrp/on_hand_sync_kmart/DB2.DC_IVNTY2 /incoming/hdidrp/on_hand_sync_kmart
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//gold/item/kmart_ksn_dc_package/record_status=active /gold/item/kmart_ksn_dc_package
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//incoming/oiitem/input/ITEM_RPT_COST /incoming/oiitem/input/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/idrp/sku /smith/idrp/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//smith/idrp/eligible_loc/ /smith/idrp/
+
+
+scp  hshaik0@trphada03.hadoop.searshc.com:/appl/hdidrp/bin/item_eligibility/smith_idrp_eligible_item_current/perform_item_eligibility_smith_idrp_eligible_item_current_1.sh hshaik0@trihadap01.vm.searshc.com:/appl/hdidrp/idrpnpc/hdidrp/bin/item_eligibility/smith_idrp_eligible_item_current
+
+create external table work_idrp 
+(DMDUNIT String,
+ DMDGROUP String,
+ DFULOC   String,
+ SKULOC   String,
+ WK_STA_DT String ,
+ KSN_ID   String,
+ SLS_TRS_TYP  String,
+ SLS_DAT_SRC  String,
+ MDS_STS  Int,
+ ON_PROMO_FL  Int,
+ SCM_IND  Int,
+ ACTION   String
+ )
+ row format delimited
+ fields terminated by ','
+ location '/user/hdidrp/work_idrp';
+
+
+
+
+
+
+
+hrmr /smith/marketing/impact/idrp_kmart/master_deal/*
+hrmr "/smith/item/hierarchy/current/*"
+hrmr "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/*"
+hrmr "/smith/marketing/impact/idrp_kmart/activity_component/*"
+hrmr "/smith/marketing/impact/idrp_kmart/offer_product_group/*"
+hrmr "/smith/marketing/impact/idrp_kmart/offer_ksn_location/*"
+hrmr "/smith/idrp/promotion_hierarchy/sears/*"
+hrmr "/work/hdmkt/mkt/data_source/persist/SearsRollOut.dat"
+hrmr "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/*"
+
+
+hlsl /smith/marketing/impact/idrp_kmart/master_deal/current 
+hlsl "/smith/item/hierarchy/current"  
+hlsl "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current"
+hlsl "/smith/marketing/impact/idrp_kmart/activity_component/current"
+hlsl "/smith/marketing/impact/idrp_kmart/offer_product_group/current"
+hlsl "/smith/marketing/impact/idrp_kmart/offer_ksn_location/current"
+hlsl "/work/hdmkt/mkt/data_source/persist/SearsRollOut.dat"
+hlsl "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current"
+hlsl "/smith/idrp/promotion_hierarchy/sears"                             data is transferred
+
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com:8020//gold/inventory/store_stock_status/current  hdfs://trihadn01.hadoop.searshc.com:8020//gold/inventory/store_stock_status
+ 
+ 
+ 
+ I finish my testing for all 4 units
+ but I had call with Terry yesterday
+ he suggested to have more fast code
+ so I created new logic for our non-empty file check function
+ and retesting the units .
+ I am reinvesting time to make code faster because it will be used by many people in futre.
+ so jira will take time to complete till tuesday.
+ Also I changed code in such way that users will have less efforts .
+
+ they will not need to call the same function again and again
+ the just need to pass all the filenames only once.
+ 
+ 
+ 

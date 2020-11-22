@@ -1,0 +1,1018 @@
+SEARS
+
+Successfully read 22 records (2883 bytes) from: "/smith/marketing/impact/idrp_kmart/master_deal/current"
+Successfully read 8201022 records (7057233725 bytes) from: "/smith/item/hierarchy/current"
+Successfully read 10863780 records from: "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current"
+Successfully read 2440 records (433609 bytes) from: "/smith/marketing/impact/idrp_kmart/activity_component/current"
+Successfully read 170785 records (62460425 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_product_group/current"
+Successfully read 103771521 records from: "/smith/marketing/impact/idrp_kmart/offer_ksn_location/current"
+Successfully read 0 records from: "/smith/idrp/promotion_hierarchy/sears"
+Successfully read 83018 records from: "/work/hdmkt/mkt/data_source/persist/SearsRollOut.dat"
+Successfully read 1277955 records from: "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current"
+
+
+Successfully stored 0 records in: "/smith/idrp/offer_estimate_impact_sears/header/current"
+Successfully stored 0 records in: "/work/idrp/offer_estimate_impact_sears/header/current"
+Successfully stored 0 records in: "/smith/idrp/offer_estimate_impact_sears/detail/current"
+Successfully stored 0 records in: "/work/idrp/offer_estimate_impact_sears/detail/current"
+
+
+==================================================================================================================================================
+
+
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/master_deal/current   /smith/marketing/impact/idrp_kmart/master_deal/current  
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current /smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/activity_component/current /smith/marketing/impact/idrp_kmart/activity_component/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/offer_product_group/current /smith/marketing/impact/idrp_kmart/offer_product_group/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/offer_ksn_location/current /smith/marketing/impact/idrp_kmart/offer_ksn_location/current
+hadoop distcp hdfs://trphadn01//work/hdmkt/mkt/data_source/persist/SearsRollOut.dat /work/hdmkt/mkt/data_source/persist/SearsRollOut.dat
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/ksn_simple_deal/ /smith/marketing/impact/idrp_kmart/ksn_simple_deal/current
+
+hadoop distcp hdfs://trphadn01//smith/idrp/promotion_hierarchy/sears /smith/idrp/promotion_hierarchy/sears
+hadoop distcp hdfs://trphadn01//smith/idrp/promotion_hierarchy/shc /smith/idrp/promotion_hierarchy/shc
+hadoop distcp hdfs://trphadn01//smith/item/hierarchy/current  /smith/item/hierarchy/current
+hadoop distcp hdfs://trphadn01//smith/idrp/promotion_hierarchy/sears /smith/idrp/promotion_hierarchy/sears
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/detail/current /smith/idrp/offer_estimate_impact_sears/detail/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/header/current /smith/idrp/offer_estimate_impact_sears/header/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_kmart/detail/current /smith/idrp/offer_estimate_impact_kmart/detail/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_kmart/header/current /smith/idrp/offer_estimate_impact_kmart/header/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_kmart/header/current  /work/idrp/offer_estimate_impact_kmart/header/current  
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_kmart/detail/current  /work/idrp/offer_estimate_impact_kmart/detail/current
+
+Output(s):
+Successfully stored 21565469 records (3536276729 bytes) in: "/smith/idrp/offer_estimate_impact/detail/current"
+Successfully stored 7214 records (2560485 bytes) in: "/work/idrp/offer_estimate_impact/header/current"
+Successfully stored 21565469 records (3536276729 bytes) in: "/work/idrp/offer_estimate_impact/detail/current"
+Successfully stored 7214 records (2538843 bytes) in: "/smith/idrp/offer_estimate_impact/header/current"
+
+=======================================================================================================================================================
+ 
+Hive Table:-
+
+
+create external table work__idrp_offer_estimate_impact_sears_header (load_ts   string,
+online_master_offer_id   string,
+product_group_id   string,
+activity_id   string,
+activity_version_id   string,
+activity_component_id   string ,
+channel_detail_component_id   string,
+channel_detail_component_desc  string,
+activity_status_cd   string,
+activity_start_dt   string,
+activity_end_dt   string,
+activity_nm   string,
+offer_nm   string,
+offer_status_cd   string,
+offer_comment_desc   string,
+offer_copy_cd   string,
+offer_copy_type_cd   string,
+offer_create_dt   string,
+offer_start_dt   string,
+offer_end_dt   string,
+offer_inventory_forecast_comment_desc   string,
+offer_last_modified_dt   string,
+advertised_store_cnt   string,
+is_member_ind   string,
+instore_raincheck_allowance_ind   string,
+instore_whole_household_ind   string,
+projected_sell_true_unit_nbr   string,
+instore_adjustment_ind   string,
+instore_order_ind   string,
+margin_base_unit_nbr   string,
+merchant_projected_margin_amt   string,
+merchant_projected_sales_amt   string,
+margin_projected_sales_qty   string,
+merchant_uplift_qty   string,
+activity_version_nm   string,
+activity_retail_format_id   string,
+activity_retail_format_desc  string,
+channel_id   string,
+channel_desc   string,
+channel_type_cd  string,channel_type_desc string,overage_price_amt  string, product_group_type_cd string,program_nm   string,
+offer_id   string, batchid   string,fmt_id   string )
+row format delimited fields terminated by '|' location '/work/idrp/offer_estimate_impact_sears/header/current';
+
+								
+create external table smith__idrp_offer_estimate_impact_sears_header (load_ts   string,
+online_master_offer_id   string,
+product_group_id   string,
+activity_id   string,
+activity_version_id   string,
+activity_component_id   string ,
+channel_detail_component_id   string,
+channel_detail_component_desc  string,
+activity_status_cd   string,
+activity_start_dt   string,
+activity_end_dt   string,
+activity_nm   string,
+offer_nm   string,
+offer_status_cd   string,
+offer_comment_desc   string,
+offer_copy_cd   string,
+offer_copy_type_cd   string,
+offer_create_dt   string,
+offer_start_dt   string,
+offer_end_dt   string,
+offer_inventory_forecast_comment_desc   string,
+offer_last_modified_dt   string,
+advertised_store_cnt   string,
+is_member_ind   string,
+instore_raincheck_allowance_ind   string,
+instore_whole_household_ind   string,
+projected_sell_true_unit_nbr   string,
+instore_adjustment_ind   string,
+instore_order_ind   string,
+margin_base_unit_nbr   string,
+merchant_projected_margin_amt   string,
+merchant_projected_sales_amt   string,
+margin_projected_sales_qty   string,
+merchant_uplift_qty   string,
+activity_version_nm   string,
+activity_retail_format_id   string,
+activity_retail_format_desc  string,
+channel_id   string,
+channel_desc   string,
+channel_type_cd  string,channel_type_desc string,overage_price_amt  string, product_group_type_cd string,program_nm   string,
+offer_id   string, batchid   string,fmt_id   string )
+row format delimited fields terminated by '\001' location '/smith/idrp/offer_estimate_impact_sears/header/current';
+
+create external table work__idrp_offer_estimate_impact_sears_detail(
+load_ts  string,
+online_mter_offer_id  string,
+offer_id  string,
+product_group_id  string,
+ksn_id   string,
+location_nbr    string,
+offer_start_dt   string,
+offer_end_dt   string,
+product_group_type_cd     string,
+instore_order_ind       string,
+shc_item_id             string,
+offer_status_cd          string,
+implied_market_ind         string,
+projected_sell_true_unit_nbr     string,
+market_desc     string,
+market_id      string,
+margin_projected_sales_qty   string,
+promotional_price_amt   string,
+in_store_pictured_item_ind   string,
+deal_type_id     string,
+deal_type_desc   string,
+deal_tier_id    string,
+multiplier_deal_level_nbr   string,
+online_deal_id   string,
+deal_value_amt   string,
+online_incentive_qualifier_id  string,
+batchid  string,
+fmt_id   string) row format delimited fields terminated by '|' location '/work/idrp/offer_estimate_impact_sears/detail/current';
+
+
+
+
+
+create external table smith__idrp_offer_estimate_impact_sears_detail(
+load_ts  string,
+online_mter_offer_id  string,
+offer_id  string,
+product_group_id  string,
+ksn_id   string,
+location_nbr    string,
+offer_start_dt   string,
+offer_end_dt   string,
+product_group_type_cd     string,
+instore_order_ind       string,
+shc_item_id             string,
+offer_status_cd          string,
+implied_market_ind         string,
+projected_sell_true_unit_nbr     string,
+market_desc     string,
+market_id      string,
+margin_projected_sales_qty   string,
+promotional_price_amt   string,
+in_store_pictured_item_ind   string,
+deal_type_id     string,
+deal_type_desc   string,
+deal_tier_id    string,
+multiplier_deal_level_nbr   string,
+online_deal_id   string,
+deal_value_amt   string,
+online_incentive_qualifier_id  string,
+batchid  string,
+fmt_id   string) row format delimited fields terminated by '\001' location '/smith/idrp/offer_estimate_impact_sears/detail/current';
+		
+				
+==========================================================================================================================
+
+KMART
+
+Successfully read 2440 records (433609 bytes) from: "/smith/marketing/impact/idrp_kmart/activity_component/current"
+Successfully read 170785 records (62460425 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_product_group/current"
+Successfully read 103771521 records (16679827457 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_ksn_location/current"
+Successfully read 8201022 records from: "/smith/item/hierarchy/current"
+Successfully read 0 records from: "/smith/idrp/promotion_hierarchy/shc"
+Successfully read 22 records (2883 bytes) from: "/smith/marketing/impact/idrp_kmart/master_deal/current"
+Successfully read 1277955 records from: "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current"
+Successfully read 10863780 records from: "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current"
+
+Output(s):
+Successfully stored 7214 records (2538843 bytes) in: "/smith/idrp/offer_estimate_impact_kmart/header/current"
+Successfully stored 7214 records (2538843 bytes) in: "/work/idrp/offer_estimate_impact_kmart/header/current"
+Successfully stored 21565469 records (3536276729 bytes) in: "/smith/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully stored 21565469 records (3536276729 bytes) in: "/work/idrp/offer_estimate_impact_kmart/detail/current"
+
+
+
+create external table smith__idrp_offer_estimate_impact_kmart_detail(
+load_ts string,online_master_offer_id string,
+offer_id  string,
+product_group_id  string,
+ksn_id  string,
+location_nbr  string,
+offer_start_dt  string,
+offer_end_dt  string,
+product_group_type_cd  string,
+instore_order_ind string,
+shc_item_id string,
+offer_status_cd string,
+implied_market_ind string,
+projected_sell_true_unit_nbr string,
+market_desc string,
+market_id string,
+margin_projected_sales_qty string,
+promotional_price_amt string,
+in_store_pictured_item_ind string,
+deal_type_id string,
+deal_type_desc string,
+deal_tier_id string,
+multiplier_deal_level_nbr string,
+online_deal_id string,
+deal_value_amt string,
+online_incentive_qualifier_id string,
+batchid string,
+fmt_id string) row format delimited fields terminated by '\001' location '/smith/idrp/offer_estimate_impact_kmart/detail/current';
+
+create external table work__idrp_offer_estimate_impact_kmart_detail(
+load_ts string,
+online_master_offer_id string,
+offer_id  string,
+product_group_id  string,
+ksn_id  string,
+location_nbr  string,
+offer_start_dt  string,
+offer_end_dt  string,
+product_group_type_cd  string,
+instore_order_ind string,
+shc_item_id string,
+offer_status_cd string,
+implied_market_ind string,
+projected_sell_true_unit_nbr string,
+market_desc string,
+market_id string,
+margin_projected_sales_qty string,
+promotional_price_amt string,
+in_store_pictured_item_ind string,
+deal_type_id string,
+deal_type_desc string,
+deal_tier_id string,
+multiplier_deal_level_nbr string,
+online_deal_id string,
+deal_value_amt string,
+online_incentive_qualifier_id string,
+batchid string,
+fmt_id string) row format delimited fields terminated by '|' location '/work/idrp/offer_estimate_impact_kmart/detail/current';
+
+
+create  external table work__idrp_offer_estimate_impact_kmart_header(
+load_ts string,
+online_master_offer_id string,
+product_group_id string,
+activity_id string,
+activity_version_id string,
+activity_component_id string,
+channel_detail_component_id string,
+channel_detail_component_desc string,
+activity_status_cd string,
+activity_start_dt string,
+activity_end_dt string,
+activity_nm string,
+offer_nm string,
+offer_status_cd string,
+offer_comment_desc string,
+offer_copy_cd string,
+offer_copy_type_cd string,
+offer_create_dt string,
+offer_start_dt string,
+offer_end_dt string,
+offer_inventory_forecast_comment_desc string,
+offer_last_modified_dt string,
+advertised_store_cnt string,
+is_member_ind string,
+instore_raincheck_allowance_ind string,
+instore_whole_household_ind string,
+projected_sell_true_unit_nbr string,
+instore_adjustment_ind string,
+instore_order_ind string,
+margin_base_unit_nbr string,
+merchant_projected_margin_amt string,
+merchant_projected_sales_amt string,
+margin_projected_sales_qty string,
+merchant_uplift_qty string,
+activity_version_nm string,
+activity_retail_format_id string,
+activity_retail_format_desc string,
+channel_id string,
+channel_desc string,
+channel_type_cd string,
+channel_type_desc string,
+overage_price_amt string,
+product_group_type_cd string,
+program_nm string,
+offer_id string,
+batchid string,
+fmt_id string)
+row format delimited fields terminated by '|' location '/work/idrp/offer_estimate_impact_kmart/header/current';
+
+
+create external table smith__idrp_offer_estimate_impact_kmart_header(
+load_ts string,
+online_master_offer_id string,
+product_group_id string,
+activity_id string,
+activity_version_id string,
+activity_component_id string,
+channel_detail_component_id string,
+channel_detail_component_desc string,
+activity_status_cd string,
+activity_start_dt string,
+activity_end_dt string,
+activity_nm string,
+offer_nm string,
+offer_status_cd string,
+offer_comment_desc string,
+offer_copy_cd string,
+offer_copy_type_cd string,
+offer_create_dt string,
+offer_start_dt string,
+offer_end_dt string,
+offer_inventory_forecast_comment_desc string,
+offer_last_modified_dt string,
+advertised_store_cnt string,
+is_member_ind string,
+instore_raincheck_allowance_ind string,
+instore_whole_household_ind string,
+projected_sell_true_unit_nbr string,
+instore_adjustment_ind string,
+instore_order_ind string,
+margin_base_unit_nbr string,
+merchant_projected_margin_amt string,
+merchant_projected_sales_amt string,
+margin_projected_sales_qty string,
+merchant_uplift_qty string,
+activity_version_nm string,
+activity_retail_format_id string,
+activity_retail_format_desc string,
+channel_id string,
+channel_desc string,
+channel_type_cd string,
+channel_type_desc string,
+overage_price_amt string,
+product_group_type_cd string,
+program_nm string,
+offer_id string,
+batchid string,
+fmt_id string)
+row format delimited fields terminated by '\001' location '/smith/idrp/offer_estimate_impact_kmart/header/current';
+
+
+==============================================================================================================================
+
+COMBINED
+
+Input(s):
+Successfully read 0 records from: "/smith/idrp/offer_estimat  
+select * from smith__idrp_offer_estimate_impact_sears_detail;
+select * from smith__idrp_offer_estimate_impact_kmart_detail; data is proper 
+select * from work__idrp_offer_estimate_impact_kmart_detail;  data is proper
+select * from smith__idrp_offer_estimate_impact_kmart_header; data is proper
+select * from work__idrp_offer_estimate_impact_kmart_header;  data is proper
+e_impact_sears/detail/current"
+Successfully read 21565469 records from: "/smith/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully read 7214 records from: "/work/idrp/offer_estimate_impact_kmart/header/current"
+Successfully read 0 records from: "/smith/idrp/offer_estimate_impact_sears/header/current"
+Successfully read 0 records from: "/smith/idrp/offer_estimate_impact_sears/detail/current"
+Successfully read 21565469 records from: "/work/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully read 0 records from: "/smith/idrp/offer_estimate_impact_sears/header/current"
+Successfully read 7214 records from: "/smith/idrp/offer_estimate_impact_kmart/header/current"
+
+Output(s):
+Successfully stored 21565469 records (3536276729 bytes) in: "/smith/idrp/offer_estimate_impact/detail/current"
+Successfully stored 7214 records (2560485 bytes) in: "/work/idrp/offer_estimate_impact/header/current"
+Successfully stored 21565469 records (3536276729 bytes) in: "/work/idrp/offer_estimate_impact/detail/current"
+Successfully stored 7214 records (2538843 bytes) in: "/smith/idrp/offer_estimate_impact/header/current"
+
+
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact/detail/current   /user/hshaik0/smith_offer_estimate_impact_detail_17_09_19
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact/header/current    /user/hshaik0/work_offer_estimate_impact_header_17_09_19
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact/detail/current    /user/hshaik0/work_offer_estimate_impact_detail_17_09_19
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact/header/current   /user/hshaik0/smith_offer_estimate_impact_header_17_09_19
+
+
+
+All input files 
+
+
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/master_deal/current   /smith/marketing/impact/idrp_kmart/master_deal/current  
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current /smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/activity_component/current /smith/marketing/impact/idrp_kmart/activity_component/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/offer_product_group/current /smith/marketing/impact/idrp_kmart/offer_product_group/current
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/offer_ksn_location/current /smith/marketing/impact/idrp_kmart/offer_ksn_location/current
+hadoop distcp hdfs://trphadn01//work/hdmkt/mkt/data_source/persist/SearsRollOut.dat /work/hdmkt/mkt/data_source/persist/SearsRollOut.dat
+hadoop distcp hdfs://trphadn01//smith/marketing/impact/idrp_kmart/ksn_simple_deal/current /smith/marketing/impact/idrp_kmart/ksn_simple_deal/current
+
+
+output files:-
+hrmr  /smith/item/hierarchy/current
+hrmr  /smith/idrp/promotion_hierarchy/sears
+hrmr  /smith/idrp/offer_estimate_impact_sears/detail/current
+hrmr  /smith/idrp/offer_estimate_impact_sears/header/current
+hrmr  /smith/idrp/offer_estimate_impact_kmart/detail/current
+hrmr  /smith/idrp/offer_estimate_impact_kmart/header/current
+hrmr  /work/idrp/offer_estimate_impact_kmart/header/current    
+hrmr  /work/idrp/offer_estimate_impact_kmart/detail/current   
+
+
+/smith/idrp/promotion_hierarchy/sears
+/smith/idrp/offer_estimate_impact_sears/detail/current  \u001
+/smith/idrp/offer_estimate_impact_sears/header/current  \u001
+/smith/idrp/offer_estimate_impact_kmart/detail/current  \u001
+/smith/idrp/offer_estimate_impact_kmart/header/current  \u001
+/work/idrp/offer_estimate_impact_kmart/header/current    |
+/work/idrp/offer_estimate_impact_kmart/detail/current    |
+
+
+hadoop distcp hdfs://trphadn01//smith/item/hierarchy/current  /smith/item/hierarchy/current
+hadoop distcp hdfs://trphadn01//smith/idrp/promotion_hierarchy/sears /smith/idrp/promotion_hierarchy/sears
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/detail/current /smith/idrp/offer_estimate_impact_sears/detail/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/header/current /smith/idrp/offer_estimate_impact_sears/header/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_kmart/detail/current /smith/idrp/offer_estimate_impact_kmart/detail/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_kmart/header/current /smith/idrp/offer_estimate_impact_kmart/header/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_kmart/header/current  /work/idrp/offer_estimate_impact_kmart/header/current  
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_kmart/detail/current  /work/idrp/offer_estimate_impact_kmart/detail/current
+
+
+drop table work__idrp_offer_estimate_impact_sears_header;
+drop table smith__idrp_offer_estimate_impact_sears_header;
+drop table work__idrp_offer_estimate_impact_sears_detail;
+drop table smith__idrp_offer_estimate_impact_sears_detail;
+drop table smith__idrp_offer_estimate_impact_kmart_detail;
+drop table work__idrp_offer_estimate_impact_kmart_detail;
+drop table smith__idrp_offer_estimate_impact_kmart_header;
+drop table work__idrp_offer_estimate_impact_kmart_header
+
+
+select * from work__idrp_offer_estimate_impact_sears_header;
+select * from smith__idrp_offer_estimate_impact_sears_header;  
+select * from work__idrp_offer_estimate_impact_sears_detail;
+
+hadoop distcp -i hftp://trphadn01/smith/hdrim/rim/recalled_items hdfs://trihadn01/smith/hdrim/rim/
+
+
+scp hshaik0@trphada03.hadoop.searshc.com:/staging/netwatch/motorola/motorola_history/AvailabilityData_03162016.tar.gz hshaik0@trihadap01.vm.searshc.com:/staging/netwatch/motorola/
+ 
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/tmp_acc_pt_minut_brk_dn" -l1 "|" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s" -ip2 "/user/hshaik0/tmp_acc_pt_down_tm" -l2 "|" -op  "/user/hshaik0/error_records_shop" 
+
+
+/manu/opt/java6_64/bin
+
+ p_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand<
+/manu/opt/java6_64/bin/java -Xms512M -Xmx1536M -cp /dprp/properties:/dprp/lib/idrp_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand
+
+create external table OFFER_EST_IMPACT_DTL1(
+load_ts  string,
+online_master_offer_id  string,
+offer_id  string,
+product_group_id  string,
+ksn_id   string,
+location_nbr    string,
+offer_start_dt   string,
+offer_end_dt   string,
+product_group_type_cd     string,
+instore_order_ind       string,
+shc_item_id             string,
+offer_status_cd          string,
+implied_market_ind         string,
+projected_sell_true_unit_nbr     string,
+market_desc     string,
+market_id      string,
+margin_projected_sales_qty   string,
+promotional_price_amt   string,
+in_store_pictured_item_ind   string,
+deal_type_id     string,
+deal_type_desc   string,
+deal_tier_id    string,
+multiplier_deal_level_nbr   string,
+online_deal_id   string,
+deal_value_amt   string,
+online_incentive_qualifier_id  string,
+batchid  string,
+fmt_id   string) row format delimited fields terminated by '\001' location '/user/hshaik0/OFFER_EST_IMPACT_DTL1';
+
+
+
+
+
+
+OFFER_EST_IMPACT_DTL1 = /user/hshaik0/OFFER_EST_IMPACT_DTL1  =   smith__idrp_offer_estimate_impact_kmart_detail =  /smith/idrp/offer_estimate_impact_kmart/detail/current
+
+
+
+
+work__idrp_offer_estimate_impact_kmart_detail
+
+
+
+
+select * from  OFFER_EST_IMPACT_DTL1 where online_master_offer_id like '%51502400%' and offer_id like '%167228%' and product_group_id like '%1456251%' and ksn_id  like '%006809507%' and location_nbr like '3810';
+
+select * from work__idrp_offer_estimate_impact_kmart_detail where online_master_offer_id like '%51502400%' and offer_id like '%167228%' and product_group_id like '%1456251%' and ksn_id  like '%006809507%' and location_nbr like '3810';
+
+
+
+
+create external table OFFER_EST_IMPACT_HDR1 (load_ts   string,
+online_master_offer_id   string,
+product_group_id   string,
+activity_id   string,
+activity_version_id   string,
+activity_component_id   string ,
+channel_detail_component_id   string,
+channel_detail_component_desc  string,
+activity_status_cd   string,
+activity_start_dt   string,
+activity_end_dt   string,
+activity_nm   string,
+offer_nm   string,
+offer_status_cd   string,
+offer_comment_desc   string,
+offer_copy_cd   string,
+offer_copy_type_cd   string,
+offer_create_dt   string,
+offer_start_dt   string,
+offer_end_dt   string,
+offer_inventory_forecast_comment_desc   string,
+offer_last_modified_dt   string,
+advertised_store_cnt   string,
+is_member_ind   string,
+instore_raincheck_allowance_ind   string,
+instore_whole_household_ind   string,
+projected_sell_true_unit_nbr   string,
+instore_adjustment_ind   string,
+instore_order_ind   string,
+margin_base_unit_nbr   string,
+merchant_projected_margin_amt   string,
+merchant_projected_sales_amt   string,
+margin_projected_sales_qty   string,
+merchant_uplift_qty   string,
+activity_version_nm   string,
+activity_retail_format_id   string,
+activity_retail_format_desc  string,
+channel_id   string,
+channel_desc   string,
+channel_type_cd  string,channel_type_desc string,overage_price_amt  string, product_group_type_cd string,program_nm   string,
+offer_id   string, batchid   string,fmt_id   string )
+row format delimited fields terminated by '\001' location '/user/hshaik0/OFFER_EST_IMPACT_HDR1';
+
+
+OFFER_EST_IMPACT_HDR1 =   /user/hshaik0/OFFER_EST_IMPACT_HDR1 =    smith__idrp_offer_estimate_impact_kmart_header  = /smith/idrp/offer_estimate_impact_kmart/header/current
+
+
+
+select * from smith__idrp_offer_estimate_impact_kmart_header where online_master_offer_id like '%51476620%' and  product_group_id like '%932607%' and 
+
+select * from OFFER_EST_IMPACT_HDR1 where online_master_offer_id like '%51476620%' and  product_group_id like '%932607%';
+
+
+
+
+
+ select * from smith__idrp_offer_estimate_impact_kmart_header  where online_master_offer_id like '%51416980%' and  product_group_id like '%1529111%' and activity_id  like '%2221008%';
+
+  select * from OFFER_EST_IMPACT_HDR1  where online_master_offer_id like '%51416980%' and  product_group_id like '%1529111%' and activity_id  like '%2221008%';
+
+
+
+Successfully stored 6320 records (2213538 bytes) in: "/smith/idrp/offer_estimate_impact_kmart/header/current"
+Successfully stored 6320 records (2213538 bytes) in: "/work/idrp/offer_estimate_impact_kmart/header/current"
+
+
+Successfully stored 6320 records (2213538 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_HDR1"
+Successfully stored 6320 records (2213538 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_HDR2"
+
+
+/home/auto/hshaik0/2019_changes/add_promo_data_testing_4053/kmart
+
+
+
+
+
+
+LocAllocTeradataImport.sql
+
+
+pig\scripts\CollectFuturePromo
+
+
+PerformCollectFutureImpactPromoTransformation_Sears.pig (new)
+PerformCollectFutureImpactPromoTransformation_Kmart.pig (updated)  
+PerformCollectFutureImpactPromoTransformation_Combined.pig (new)
+
+
+combined output :- /user/hshaik0/combined_merged_output
+
+
+hlsl /smith/idrp/offer_estimate_impact_sears/header/current
+hlsl /smith/idrp/offer_estimate_impact_sears/detail/current
+hlsl /work/idrp/offer_estimate_impact_sears/header/current
+hlsl /work/idrp/offer_estimate_impact_sears/detail/current
+
+hlsl /smith/idrp/offer_estimate_impact/header/current
+hlsl /smith/idrp/offer_estimate_impact/detail/current
+hlsl /work/idrp/offer_estimate_impact/header/current
+hlsl /work/idrp/offer_estimate_impact/detail/current
+
+hlsl /smith/idrp/offer_estimate_impact_kmart/header/current
+hlsl /smith/idrp/offer_estimate_impact_kmart/detail/current
+hlsl /work/idrp/offer_estimate_impact_kmart/header/current
+hlsl /work/idrp/offer_estimate_impact_kmart/detail/current
+
+
+
+# SCHEMA Files: /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_activity_component_current.schema
+#               /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_offer_prd_group_current.schema
+#               /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_offer_ksn_locn_current.schema
+#               /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_ksn_simple_deal_current.schema
+#               /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_ksn_bogo_deal_current.schema
+#               /appl/hdidrp/pig/schema/smith__marketing_impact_idrp_kmart_mst_dl_current.schema
+#               /appl/hdidrp/pig/schema/smith__item_hierarchy_current.schema
+#               /appl/hdidrp/pig/schema/smith__idrp_dmdpostdate_current.schema
+#               /appl/hdidrp/pig/schema/smith__idrp_promo_hier_sears_current.schema
+#               /appl/hdidrp/pig/schema/work__idrp_item_hirarachy_combined_all_current.schema
+#
+
+
+SEARS
+1:  PerformCollectFutureImpactPromoTransformation_Sears.pig
+
+SMITH__MARKETING_IMPACT_IDRP_KMART_ACTIVITY_COMPONENT_CURRENT_LOCATION=
+SMITH__MARKETING_IMPACT_IDRP_KMART_KSN_BOGO_DEAL_CURRENT_LOCATION         
+SMITH__MARKETING_IMPACT_IDRP_KMART_KSN_SIMPLE_DEAL_CURRENT_LOCATION   
+SMITH__MARKETING_IMPACT_IDRP_KMART_MASTER_DEAL_CURRENT_LOCATION      
+SMITH__MARKETING_IMPACT_IDRP_KMART_OFFER_KSN_LOCATION_CURRENT_LOCATION  
+SMITH__MARKETING_IMPACT_IDRP_KMART_OFFER_PRODUCT_GROUP_CURRENT_LOCATION  
+SMITH__ITEM_COMBINED_HIERARCHY_CURRENT_LOCATION  
+smith__idrp_promo_hier_srs_location  
+
+ 
+./pig/schema/smith__marketing_impact_idrp_kmart_activity_component_current.schema    /smith/marketing/impact/idrp_kmart/activity_component/current
+./pig/schema/smith__marketing_impact_idrp_kmart_ksn_bogo_deal_current.schema         /smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current
+./pig/schema/smith__marketing_impact_idrp_kmart_ksn_simple_deal_current.schema       /smith/marketing/impact/idrp_kmart/ksn_simple_deal/current
+./pig/schema/smith__marketing_impact_idrp_kmart_master_deal_current.schema           /smith/marketing/impact/idrp_kmart/master_deal/current
+./pig/schema/smith__marketing_impact_idrp_kmart_offer_ksn_location_current.schema    /smith/marketing/impact/idrp_kmart/offer_ksn_location/current
+./pig/schema/smith__marketing_impact_idrp_kmart_offer_product_group_current.schema   /smith/marketing/impact/idrp_kmart/offer_product_group/current
+./pig/schema/smith__item_combined_hierarchy_current                                  /smith/item/hierarchy/current
+./pig/schema/smith__idrp_promotion_hierarchy_sears.schema                            /smith/promotion_hierarchy/sears
+
+
+./work__idrp_offer_estimate_impact_kmart_header.schema
+
+                                                 
+DMDPOSTDATE_LOCATION
+work_impact_searsrollout
+
+
+
+
+==============================================================================================================================================================
+Errors:-
+
+1>
+Combined
+
+
+2019-09-03 09:50:02,966 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,003 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,262 [main] ERROR org.apache.pig.PigServer - exception during parsing: Error during parsing. Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+Failed to parse: Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+        at org.apache.pig.parser.QueryParserDriver.parse(QueryParserDriver.java:196)
+        at org.apache.pig.PigServer$Graph.parseQuery(PigServer.java:1688)
+        at org.apache.pig.PigServer$Graph.access$000(PigServer.java:1421)
+        at org.apache.pig.PigServer.parseAndBuild(PigServer.java:354)
+
+		
+		
+	#load_ts defined two times in 	./work__idrp_offer_estimate_impact_kmart_header.schema
+	
+	removed load_ts from ./work__idrp_offer_estimate_impact_kmart_header.schema
+	
+	
+2>
+	2019-09-03 09:50:02,966 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,003 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,262 [main] ERROR org.apache.pig.PigServer - exception during parsing: Error during parsing. Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+Failed to parse: Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+        at org.apache.pig.parser.QueryParserDriver.parse(QueryParserDriver.java:196)
+        at org.apache.pig.PigServer$Graph.parseQuery(PigServer.java:1688)
+        at org.apache.pig.PigServer$Graph.access$000(PigServer.java:1421)
+        at org.apache.pig.PigServer.parseAndBuild(PigServer.java:354)
+
+		
+		
+	#load_ts defined two times in 	work__idrp_offer_estimate_impact_sears_header.schema
+	
+	removed load_ts from work__idrp_offer_estimate_impact_sears_header.schema
+	
+3>	
+	2019-09-03 09:50:02,966 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,003 [main] INFO  org.apache.hadoop.conf.Configuration.deprecation - fs.default.name is deprecated. Instead, use fs.defaultFS
+2019-09-03 09:50:03,262 [main] ERROR org.apache.pig.PigServer - exception during parsing: Error during parsing. Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+Failed to parse: Pig script failed to parse:
+<file PerformCollectFutureImpactPromoTransformation_Combined.pig, line 165, column 0> Duplicated alias in schema: load_ts
+        at org.apache.pig.parser.QueryParserDriver.parse(QueryParserDriver.java:196)
+        at org.apache.pig.PigServer$Graph.parseQuery(PigServer.java:1688)
+        at org.apache.pig.PigServer$Graph.access$000(PigServer.java:1421)
+        at org.apache.pig.PigServer.parseAndBuild(PigServer.java:354)
+
+		
+		
+	#load_ts defined two times in smith__idrp_offer_estimate_impact_sears_header.schema
+	
+	removed load_ts from smith__idrp_offer_estimate_impact_sears_header.schema
+	
+	
+	
+same output files are defined in both combined and kmart script
+	
+ ================================================================================================================================================================
+ 
+ 
+Below script running fine
+ 
+PerformCollectFutureImpactPromoTransformation_Sears.sh
+
+===================================================================================================================================================================
+
+
+Done ..
+No more errors
+ 
+	
+ PerformCollectFuturePromoTransformation_Kmart.sh
+ 
+ 
+ /appl/hdidrp/bin/CollectFuturePromo/PerformCollectFuturePromoTransformation_Kmart.sh
+ 
+ 
+ Out path variables exist in production 04 PerformCollectFuturePromoTransformation_Kmart.param but not exist in
+ PerformCollectFuturePromoTransformation_Kmart.param in trusted branch 
+ 
+ 
+
+Sears output file :- 
+hlsl /smith/idrp/offer_estimate_impact_sears/header/current
+hlsl /smith/idrp/offer_estimate_impact_sears/detail/current
+hlsl /work/idrp/offer_estimate_impact_sears/header/current
+hlsl /work/idrp/offer_estimate_impact_sears/detail/current
+
+
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/header/current  /smith/idrp/offer_estimate_impact_sears/header/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact_sears/detail/current  /smith/idrp/offer_estimate_impact_sears/detail/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_sears/header/current   /work/idrp/offer_estimate_impact_sears/header/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact_sears/detail/current   /work/idrp/offer_estimate_impact_sears/detail/current
+
+
+ 
+ 
+HEENASALIM1
+ 
+ 
+ 
+Kmart output files 
+input_table_delimiter='\\u0001'
+output_table_delimiter='|'
+output_hdfs_path_1=$PROJECT_SMITH_DIR/offer_estimate_impact_kmart/header/current
+output_hdfs_path_2=$PROJECT_SMITH_DIR/offer_estimate_impact_kmart/detail/current
+output_hdfs_path_3=$PROJECT_WORK_DIR/offer_estimate_impact_kmart/header/current
+output_hdfs_path_4=$PROJECT_WORK_DIR/offer_estimate_impact_kmart/detail/current
+
+
+combined output files
+
+Store UNION_SMITH_COMBINED_HDR into '$smith__idrp_offer_estimate_impact_header' using PigStorage('$FIELD_DELIMITER_CONTROL_A');
+Store UNION_SMITH_COMBINED_DTL into '$smith__idrp_offer_estimate_impact_detail' using PigStorage('$FIELD_DELIMITER_CONTROL_A');
+Store UNION_WORK_COMBINED_HDR into '$work__idrp_offer_estimate_impact_header' using PigStorage('$output_table_delimiter');
+Store UNION_WORK_COMBINED_DTL into '$work__idrp_offer_estimate_impact_detail' using PigStorage('$output_table_delimiter');
+
+/smith/idrp/offer_estimate_impact/header/current ^A
+/smith/idrp/offer_estimate_impact/detail/current   ^A
+/work/idrp/offer_estimate_impact/header/current   ^A  and |
+/work/idrp/offer_estimate_impact/detail/current   ^A  and |
+	
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact/header/current  /smith/idrp/offer_estimate_impact/header/current
+hadoop distcp hdfs://trphadn01//smith/idrp/offer_estimate_impact/detail/current  /smith/idrp/offer_estimate_impact/detail/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact/header/current   /work/idrp/offer_estimate_impact/header/current
+hadoop distcp hdfs://trphadn01//work/idrp/offer_estimate_impact/detail/current   /work/idrp/offer_estimate_impact/detail/current
+
+
+hadoop distcp hdfs://trphadn01//smith/idrp/dmdpostdate/DMDPOSTDATE*   /smith/idrp/dmdpostdate
+
+
+ 
+ combined merged output 
+ '/user/hshaik0/combined_merged_output'
+ 
+/smith/idrp/offer_estimate_impact/header/current ^A
+/smith/idrp/offer_estimate_impact/detail/current   ^A
+/work/idrp/offer_estimate_impact/header/current   ^A  and |
+/work/idrp/offer_estimate_impact/detail/current   ^A  and |
+
+
+
+hlsl '/smith/marketing/impact/idrp_kmart/activity_component/current'  
+hlsl '/smith/marketing/impact/idrp_kmart/offer_product_group/current'
+hlsl '/smith/marketing/impact/idrp_kmart/offer_ksn_location/current'
+hlsl '/smith/item/hierarchy/current'
+hlsl '/smith/idrp/promotion_hierarchy/shc'
+hlsl '/smith/marketing/impact/idrp_kmart/master_deal/current'
+hlsl '/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current'
+hlsl '/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current'
+
+
+
+kmart and sears files
+
+
+ '/smith/idrp/offer_estimate_impact_kmart/header/current' ^A
+ '/smith/idrp/offer_estimate_impact_kmart/detail/current' ^A 
+ '/work/idrp/offer_estimate_impact_kmart/header/current'   |
+ '/work/idrp/offer_estimate_impact_kmart/detail/current'   |
+
+
+ '/smith/idrp/offer_estimate_impact_sears/header/current'  ^A
+ '/smith/idrp/offer_estimate_impact_sears/detail/current'  ^A
+ '/work/idrp/offer_estimate_impact_sears/detail/current'    |
+ '/work/idrp/offer_estimate_impact_sears/header/current'    |
+ 
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/combined_output/*'  -l1  '|' 0s,1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s -ip2  '/user/hshaik0/sears_kmart_merged_output/*' -l2  '|' -op '/user/hshaik0/diff_tool_result_for_4053'  --overwrite
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/combined_output/*'  -l1  '|' 0s,1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s -ip2  '/user/hshaik0/sears_kmart_merged_output/*' -l2  '|' -op '/user/hshaik0/diff_tool_result_for_4053'  --overwrite  2>&1 >> logs_4053
+
+
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/testing_output'  -l1  '|' 1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s -ip2  '/user/hshaik0/sears_kmart_merged_output/*' -l2  '|' -op '/user/hshaik0/production_output'  --overwrite  2>&1 > logs_4053
+
+
+/user/hshaik0/sears_kmart_merged_output/*
+/user/hshaik0/combined_output/*
+
+48750680
+
+
+sh /home/auto/hshaik0/2019_changes/add_promo_data_testing_4053/kmart/PerformCollectFuturePromoTransformation_Kmart_production.sh 122 /appl/conf/hdidrp/prod  CollectFuturePromo
+
+sh /home/auto/hshaik0/2019_changes/add_promo_data_testing_4053/kmart/PerformCollectFuturePromoTransformation_Kmart.sh 123 /appl/conf/hdidrp/prod  CollectFuturePromo
+
+
+
+
+hcp	/smith/marketing/impact/idrp_kmart/master_deal/current   /user/hdidrp/impact/idrp_kmart/master_deal/
+hcp	/smith/marketing/impact/idrp_kmart/activity_component/current /user/hdidrp/impact/idrp_kmart/activity_component/
+hcp	/smith/marketing/impact/idrp_kmart/offer_product_group/current /user/hdidrp/idrp_kmart/offer_product_group/
+hcp	/smith/marketing/impact/idrp_kmart/offer_ksn_location/current /user/hdidrp/impact/idrp_kmart/offer_ksn_location/
+hcp	/work/hdmkt/mkt/data_source/persist/SearsRollOut.dat /user/hdidrp/mkt/data_source/persist/
+
+=============================================================================================================================
+
+'/user/hshaik0/OFFER_EST_IMPACT_HDR1'
+'/user/hshaik0/OFFER_EST_IMPACT_HDR2'
+'/user/hshaik0/OFFER_EST_IMPACT_DTL1'
+'/user/hshaik0/OFFER_EST_IMPACT_DTL2'
+
+
+LOAD '/smith/idrp/offer_estimate_impact_kmart/header/current' USING PigStorage('/u0001');
+LOAD '/work/idrp/offer_estimate_impact_kmart/header/current' USING PigStorage('|');
+LOAD '/smith/idrp/offer_estimate_impact_kmart/detail/current' USING PigStorage('/u0001');
+LOAD '/work/idrp/offer_estimate_impact_kmart/detail/current' USING PigStorage('|');
+
+
+
+Testing_kmart
+Input(s):
+Successfully read 926 records (200164 bytes) from: "/smith/marketing/impact/idrp_kmart/activity_component/current"
+Successfully read 207894 records (75796788 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_product_group/current"
+Successfully read 95363956 records (15479880164 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_ksn_location/current"
+Successfully read 8211165 records from: "/smith/item/hierarchy/current"
+Successfully read 2625 records (105429 bytes) from: "/smith/idrp/promotion_hierarchy/shc"
+Successfully read 44 records (5472 bytes) from: "/smith/marketing/impact/idrp_kmart/master_deal/current"
+Successfully read 1893324 records from: "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current"
+Successfully read 2190058 records from: "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current"
+
+Output(s):
+Successfully stored 6320 records (2213538 bytes) in: "/smith/idrp/offer_estimate_impact_kmart/header/current"
+Successfully stored 6320 records (2213538 bytes) in: "/work/idrp/offer_estimate_impact_kmart/header/current"
+Successfully stored 26308248 records (4109976972 bytes) in: "/smith/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully stored 26308248 records (4109976972 bytes) in: "/work/idrp/offer_estimate_impact_kmart/detail/current"
+
+Counters:
+Total records written : 52629136
+
+
+Production_kmart
+
+
+Input(s):
+Successfully read 926 records (200164 bytes) from: "/smith/marketing/impact/idrp_kmart/activity_component/current"
+Successfully read 207894 records (75796788 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_product_group/current"
+Successfully read 95363956 records (15479880164 bytes) from: "/smith/marketing/impact/idrp_kmart/offer_ksn_location/current"
+Successfully read 8211165 records from: "/smith/item/hierarchy/current"
+Successfully read 2625 records (105429 bytes) from: "/smith/idrp/promotion_hierarchy/shc"
+Successfully read 44 records (5472 bytes) from: "/smith/marketing/impact/idrp_kmart/master_deal/current"
+Successfully read 1893324 records from: "/smith/marketing/impact/idrp_kmart/ksn_simple_deal/current"
+Successfully read 2190058 records from: "/smith/marketing/impact/idrp_kmart/ksn_bogo_deal/current"
+
+Output(s):
+Successfully stored 6320 records (2213538 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_HDR1"
+Successfully stored 6320 records (2213538 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_HDR2"
+Successfully stored 26308248 records (4109976972 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_DTL1"
+Successfully stored 26308248 records (4109976972 bytes) in: "/user/hshaik0/OFFER_EST_IMPACT_DTL2"
+
+
+
+
+Input(s):
+Successfully read 6320 records from: "/work/idrp/offer_estimate_impact_kmart/header/current"
+Successfully read 26308248 records from: "/smith/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully read 26308248 records from: "/work/idrp/offer_estimate_impact_kmart/detail/current"
+Successfully read 6320 records from: "/smith/idrp/offer_estimate_impact_kmart/header/current"
+Successfully read 6320 records from: "/user/hshaik0/OFFER_EST_IMPACT_HDR1"
+Successfully read 26308248 records from: "/user/hshaik0/OFFER_EST_IMPACT_DTL2"
+Successfully read 6320 records from: "/user/hshaik0/OFFER_EST_IMPACT_HDR2"
+Successfully read 26308248 records from: "/user/hshaik0/OFFER_EST_IMPACT_DTL1"
+
+Output(s):
+Successfully stored 52629136 records (8224381020 bytes) in: "/user/hshaik0/testing_output"
+Successfully stored 52629136 records (8224381020 bytes) in: "/user/hshaik0/production_output"
+
+
+
+
+
+OFFER_EST_IMPACT_DTL1 = /user/hshaik0/OFFER_EST_IMPACT_DTL1  =   smith__idrp_offer_estimate_impact_kmart_detail =  /smith/idrp/offer_estimate_impact_kmart/detail/current
+
+
+
+
+
+
+
+select * from  OFFER_EST_IMPACT_DTL1 where online_master_offer_id like '%51162407%' and activity_id like '%2198910%';
+select * from smith__idrp_offer_estimate_impact_kmart_detail where online_master_offer_id like '%51162407%' and activity_id like '%2198910%';
+
+
+
+
+OFFER_EST_IMPACT_HDR1 =   /user/hshaik0/OFFER_EST_IMPACT_HDR1 =    smith__idrp_offer_estimate_impact_kmart_header  = /smith/idrp/offer_estimate_impact_kmart/header/current
+
+
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/OFFER_EST_IMPACT_HDR1'  -l1  '^A' 1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s,27s,28s,29s,30s,31s,32s,33s,34s,35s,36s,37s,38s,39s,40s,41s,42s,43s,44s,45s,46s -ip2  '/smith/idrp/offer_estimate_impact_kmart/header/current' -l2  '^A' -op '/user/hshaik0/IPS_4053_KMART_DETAIL_OUTPUT'  --overwrite  
+
+
+==================================================================================================================================================================
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/OFFER_EST_IMPACT_DTL11'  -l1  '|' 1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s,27s,28s,29s,30s,31s,32s,33s,34s,35s,36s,37s,38s,39s,40s,41s,42s,43s,44s,45s,46s -ip2  '/user/hshaik0/smith_idrp_offer_estimate_impact_kmart_detail' -l2  '|' -op '/user/hshaik0/IPS_4053_KMART_DETAIL_OUTPUT'  --overwrite  2>&1 > logs_4053_kmart_detail
+
+47 columns 
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 '/user/hshaik0/OFFER_EST_IMPACT_HDR11'  -l1  '|' 2s -ip2  '/user/hshaik0/smith_offer_estimate_impact_kmart_header' -l2  '|' -op '/user/hshaik0/IPS_4053_KMART_HEADER_OUTPUT'  --overwrite  2>&1 > logs_4053_kmart_header
+ 
+47 columns   6908 records
+
+
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/OFFER_EST_IMPACT_HDR11"  -l1  "|" 1s,2s -ip2  "/user/hshaik0/smith_offer_estimate_impact_kmart_header" -l2  "|" -op "/user/hshaik0/diff_tool_result_for_4053"  --overwrite  
+
+
+
+
+
+
+
+

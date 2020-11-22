@@ -1,0 +1,87 @@
+inventory
+/appl/hdshc/inventory/outbound_order_detail/bin/sqoop_to_incoming_and_ongoing.sh      hadoop fs -mkdir -p ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/outbound_order_detail/bin/sqoop_to_incoming_and_ongoing.sh      hadoop fs -mkdir -p ${CURRENT_INCOMING_DIR_TW}
+/appl/hdshc/inventory/freight_area/bin/sqoop_to_incoming_and_ongoing.sh               hadoop fs -mkdir -p ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/nros_dc_order_receipt_detail/bin/create_dummy_file.sh           mkdir -p ${staging_dir}   
+/appl/hdshc/inventory/freight_lane/bin/sqoop_to_incoming_and_ongoing.sh               hadoop fs -mkdir -p ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/rim/diff_tool/compare.sh                                        mkdir -p  ${staging_file2}.${curr_dt}   
+/appl/hdshc/inventory/cdfc/get_daily_CDFC_on_hand_incoming.sh                         hadoop fs -mkdir -p $INCOMING_DIR    
+/appl/hdshc/inventory/shipment_header/bin/sqoop_to_incoming_and_ongoing.sh            hadoop fs -mkdir ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/shipment_header/bin/sqoop_to_incoming_and_ongoing.sh            hadoop fs -mkdir ${CURRENT_INCOMING_DIR_TW}
+/appl/hdshc/inventory/outbound_order_header/bin/sqoop_to_incoming_and_ongoing.sh      hadoop fs -mkdir ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/outbound_order_header/bin/sqoop_to_incoming_and_ongoing.sh      hadoop fs -mkdir ${CURRENT_INCOMING_DIR_TW}
+/appl/hdshc/inventory/shipment_detail/bin/sqoop_to_incoming_and_ongoing.sh            hadoop fs -mkdir ${CURRENT_INCOMING_DIR_DD}
+/appl/hdshc/inventory/shipment_detail/bin/sqoop_to_incoming_and_ongoing.sh            hadoop fs -mkdir ${CURRENT_INCOMING_DIR_TW}
+/appl/hdshc/inventory/dos_facility/bin/run_generate_gold_tables.sh                    hadoop fs -mkdir ${p_gold_tbl}
+/appl/hdshc/inventory/rim/run_rim_gold_to_gold_hist.sh                                hadoop fs -mkdir ${GOLD_HISTORY}/create_dt=$curr_dt
+/appl/hdshc/inventory/rim/diff_tool/src/main.rb                                       cmd = "hadoop fs -mkdir #{@output_dir}"
+/appl/hdshc/inventory/rim/run_rim_gold_to_gold_hist.sh                                hadoop fs -mkdir ${GOLD_HISTORY}/create_dt=$curr_dt    Load_RIM_PRIMDATA_Gold_Hist
+/appl/hdshc/inventory/rim/run_rim_work_to_gold.sh                                     hadoop fs -mkdir ${SGOLD_PATH}
+/appl/hdshc/inventory/rim/run_rim_work_to_gold.sh                                     hadoop fs -mkdir ${GOLD_PATH}/data_center\=${DT_CNTR_L}
+/appl/hdshc/inventory/rim/run_srim_gold_to_gold_hist.sh                               hadoop fs -mkdir ${SGOLD_HISTORY}/create_dt=$curr_dt
+/appl/hdshc/inventory/rim/run_srim_gold_to_gold_hist.sh                               hadoop fs -mkdir ${SGOLD_HISTORY}/create_dt=${curr_dt}/
+/appl/hdshc/inventory/rim/inc_to_gold_hist.sh                                         hadoop fs -mkdir ${GOLD_HISTORY}/create_dt=$day_dt
+/appl/hdshc/inventory/rim/load_daily_rim_inventory_incoming.sh                        /usr/bin/hadoop fs -mkdir $INC_RIM
+/appl/hdshc/inventory/rim/load_daily_rim_inventory_incoming.sh                        hadoop fs -mkdir $INCOMING_FILE
+/appl/hdshc/inventory/rim/load_daily_rim_inventory_work.sh                           /usr/bin/hadoop fs -mkdir $WORK_DIR
+/appl/common/bin/utilities.sh                                                         use  mkdir -p to create directory  
+/appl/hdshc/inventory/item_due_in/bin/run.sh                                          use -p
+
+/appl/hdshc/inventory/stock_status/run_purge_ksn.sh                                   HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar"
+/appl/hdshc/inventory/stock_status/run_purge_detail_test                              HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar"
+/appl/hdshc/inventory/stock_status/run-ss-new                                         HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar"
+/appl/hdshc/inventory/stock_status/run_purge_detail.sh                                HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar"
+/appl/hdshc/inventory/stock_statkkus/run_purge_ksn.sh-save                            HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar"
+/appl/hdshc/inventory/rim/diff_tool/tool.properties                                   HADOOP_STREAMING_JAR="$HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-mr1.jar" 
+/appl/hdshc/inventory/dc/run_dc_gold.sh                                               hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \   
+
+
+ima		
+/appl/hdshc/ima/inc2gold/sears/run_combined_item_hierarchy_smith.sh                   hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_combined_item_hierarchy_smith.sh                   hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_combined_items_hier_step1.sh                       hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears1_items_step1.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears1_items_step3.sh 	                      hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears2_items_step2.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears2_items_step4.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears1_items_step5.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears_item_hierarchy.sh                            hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_merge_sears1_sears2.sh                             hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_combined_items_hier_step2.sh                       hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears2_items_step1.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears1_items_step2.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears1_items_step4.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears2_items_step3.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/sears/run_sears2_items_step5.sh                              hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/run_price_link_member.sh                                     hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/run_kmart_items_step1.sh                                     hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/run_kmart_items_step2_1.sh                                   hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/run_kmart_items_step2_2.sh                                   hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/shc/run_kmart_items_step1.sh                                 hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/shc/run_kmart_items_step2.sh                                 hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/shc/run_kmart_items_step10_mapside.sh                        hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/shc/run_kmart_items_step3_mapside.sh                         hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+/appl/hdshc/ima/inc2gold/shc/run_shc_item_hier.sh                                     hadoop jar $HADOOP_MR1_HOME/contrib/streaming/hadoop-streaming-*.jar \
+
+/appl/hdshc/ima/utilities/diff_tool/src/main.rb                                       cmd = "hadoop fs -mkdir #{report}"
+/appl/hdshc/ima/utilities/diff_tool/src/main.rb                                       cmd = "hadoop fs -mkdir #{@output_dir}"
+/appl/hdshc/ima/executer/unload_dos_data.sh                                           hdfs dfs -mkdir ${ARCHIVE_LOC}
+/appl/hdshc/ima/executer/unload_sprs_data.sh                                          hadoop fs -mkdir ${INCOMING_DIR}
+/appl/hdshc/ima/executer/run_generate_gold__sears_xref.sh                             hadoop fs -mkdir /gold/item/sears/xref/
+/appl/hdshc/ima/executer/run_generate_delta.sh                                        hadoop fs -mkdir ${EXTRA_RECS_IN_YESTERDAY}
+/appl/hdshc/ima/executer/run_generate_delta.sh                                        hadoop fs -mkdir ${EXTRA_RECS_IN_TODAY}
+/appl/hdshc/ima/executer/run_generate_delta.sh                                        hadoop fs -mkdir -p ${DELTA_PATH}
+
+sprs 
+/appl/hdshc/sprs/inc2gold/run_sprssls_daily                                           hdfs dfs -mkdir  $DEST2
+/appl/hdshc/sprs/inc2gold/run_sprssls_daily                                           hadoop fs -mkdir $DEST2
+
+marketing
+/appl/hdshc/marketing/kin_price_purge/executer/purge_process.sh                       hadoop fs -mkdir ${p_purge_file_after_processing}
+/appl/hdshc/marketing/kin_price_purge/executer/oldgoldcompression.sh                  hadoop fs -mkdir ${p_work_kin_price_archive}
+/appl/hdshc/marketing/kin_price_purge/executer/oldgoldcompression.sh                  hadoop fs -mkdir ${p_work_kin_price_archive}
+
+item 
+/appl/hdshc/item/common/bin/data_sourcing.sh                                          hadoop fs -mkdir ${TARGET_DIR}
+/appl/hdshc/item//online_hierarchy/bin/load_wkly_online_hierarchy_stg_to_inc.sh       hadoop fs -mkdir ${INC_LOC}
+/appl/hdshc/item//online_hierarchy/bin/mail_incident.sh                               hadoop fs -mkdir ${INC_LOC}/

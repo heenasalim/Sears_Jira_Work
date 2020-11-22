@@ -1,0 +1,116 @@
+select * from stgmgr.job j, stgmgr.job_interface ji, stgmgr.batchctl b
+where j.job_name='Pkj_Hadoop_MI_Pre_Master'
+and j.job_interface_id=ji.job_interface_id
+and ji.job_interface_id=b.job_interface_id
+order by batchctl_id desc;
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/store_source_directive /work/idrp/idrpnpc/smith/idrp/store_source_directive
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/category_review_vps /work/idrp/idrpnpc/work/idrp/category_review_vps
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/item_eligibility_batchdate /work/idrp/idrpnpc/smith/idrp/item_eligibility_batchdate
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/processing_day /work/idrp/idrpnpc/work/idrp/processing_day
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/shc_item_combined /work/idrp/idrpnpc/smith/idrp/shc_item_combined
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/vend_pack_dc_combined /work/idrp/idrpnpc/smith/idrp/vend_pack_dc_combined
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/catg_rvw_dc /work/idrp/idrpnpc/work/idrp/catg_rvw_dc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/geographic/network_dc /work/idrp/idrpnpc/gold/geographic/network_dc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/work__futr_dt_src_dir_combined /work/idrp/idrpnpc/work/idrp/work__futr_dt_src_dir_combined
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/space_planning_vendor_package_stores/current /work/idrp/idrpnpc/smith/idrp/space_planning_vendor_package_stores/current
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/location/ims/master /work/idrp/idrpnpc/gold/location/ims/master
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/replenishment_store_parameter /work/idrp/idrpnpc/smith/idrp/replenishment_store_parameter
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/store_servicing_dc /work/idrp/idrpnpc/work/idrp/store_servicing_dc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/future_reorder_instructions_stores /work/idrp/idrpnpc/smith/idrp/future_reorder_instructions_stores
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/future_reorder_instructions_dc /work/idrp/idrpnpc/smith/idrp/future_reorder_instructions_dc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/reorder_instructions_dc_inforem /work/idrp/idrpnpc/smith/idrp/reorder_instructions_dc_inforem
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/future_reorder_instructions_servicing_dc /work/idrp/idrpnpc/smith/idrp/future_reorder_instructions_servicing_dc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/store_level_vend_pack_loc_final /work/idrp/idrpnpc/work/idrp/store_level_vend_pack_loc_final
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/vendor_package_store_driver /work/idrp/idrpnpc/smith/idrp/vendor_package_store_driver
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/lt_idrp_segment /work/idrp/idrpnpc/smith/idrp/lt_idrp_segment
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/reorder_future_ndc /work/idrp/idrpnpc/smith/idrp/reorder_future_ndc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/future_reorder_future_ndc /work/idrp/idrpnpc/smith/idrp/future_reorder_future_ndc
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/work__idrp_reorder_instructions_dc_rdordins_combined /work/idrp/idrpnpc/work/idrp/work__idrp_reorder_instructions_dc_rdordins_combined
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/reorder_instructions_dc_rdordins_dc_updated /work/idrp/idrpnpc/work/idrp/reorder_instructions_dc_rdordins_dc_updated
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/kmart_eligible_driver /work/idrp/idrpnpc/work/idrp/kmart_eligible_driver
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/category_review_future_network_distribution_code /work/idrp/idrpnpc/smith/idrp/category_review_future_network_distribution_code
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/work__idrp_reorder_instructions_dc_lead_time /work/idrp/idrpnpc/work/idrp/work__idrp_reorder_instructions_dc_lead_time
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/converted/ie_smith__idrp_lt_seg_min_dt /work/idrp/idrpnpc/work/idrp/converted/ie_smith__idrp_lt_seg_min_dt
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/inbound_eligible_category_review_vendor_packages /work/idrp/idrpnpc/smith/idrp/inbound_eligible_category_review_vendor_packages
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/eligible_alloc_vend_packs /work/idrp/idrpnpc/smith/idrp/eligible_alloc_vend_packs
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/inbound_eligible_vendor_packages /work/idrp/idrpnpc/smith/idrp/inbound_eligible_vendor_packages
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/inbound_eligible_vendor_packages_combined /work/idrp/idrpnpc/smith/idrp/inbound_eligible_vendor_packages_combined
+
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/imp_offer/history hdfs://trihadn01.hadoop.searshc.com//gold/marketing/promotional/imp_offer/history
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/activity/current  hdfs://trihadn01.hadoop.searshc.com//gold/marketing/promotional/activity
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/offer_ksn_locn/history hdfs://trihadn01.hadoop.searshc.com//gold/marketing/promotional/offer_ksn_locn
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/promohist/work_ksn_locn_mi_intermediate/ksn_locn_mi_intermediate_final /work/idrp/promohist/work_ksn_locn_mi_intermediate
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/udt_deal_type_source /smith/idrp
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/udt_vehicle_type_source /smith/idrp
+
+
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/online_drop_ship_item hdfs://trihadn01.hadoop.searshc.com//smith/idrp/online_drop_ship_item
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/online_fulfillment   hdfs://trihadn01.hadoop.searshc.com//smith/idrp/online_fulfillment
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/shc_item_combined hdfs://trihadn01.hadoop.searshc.com//smith/idrp/shc_item_combined
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/item_rpt_cost hdfs://trihadn01.hadoop.searshc.com//work/idrp/item_rpt_cost
+
+
+
+Update stgmgr.job_event_activity
+set job_event_status_id = 3     
+where batchctl_id ='7114';
+
+
+commit;
+
+
+select * from stgmgr.job j, stgmgr.job_interface ji, stgmgr.batchctl b
+where j.job_name='Pkj_Hadoop_MI_Master'
+and j.job_interface_id=ji.job_interface_id
+and ji.job_interface_id=b.job_interface_id
+order by batchctl_id desc;
+       to_char(jea.update_ts, 'yyyy-mm-dd hh24:mi:ss'),
+       jes.description
+  from stgmgr.job_event          je,
+       STGMGR.job_event_activity jea,
+       stgmgr.job                j,
+       stgmgr.job_event_status   jes,
+       stgmgr.job_interface      ji
+ where j.job_name = 'Pkj_Hadoop_MI_Master'
+   and j.job_interface_id = ji.job_interface_id
+   and jea.job_id = j.job_id
+   and jea.batchctl_id = '7116'
+   and je.job_event_id = jea.job_event_id
+   and jea.job_event_status_id = jes.job_event_status_id
+ order by 2 asc, 3; 
+ 
+
+select je.event_name,
+       jea.job_event_activity_id,
+       to_char(jea.create_ts, 'yyyy-mm-dd hh24:mi:ss'),
+ 
+ Update stgmgr.job_event_activity
+set job_event_status_id = 3
+where batchctl_id in ('7114','7113','7112','7111','6094','6027','2819','2817','2403','2399','2398','2397','2395','2371','2358','2344','2343','2342','2341','2340','2321');
+
+commit;
+
+Update stgmgr.job_event_activity
+set job_event_status_id = 3     
+where batchctl_id in ('7118','7116','7115','2718','2716','2372','2365','1758','1753','1751','1746','1745','1735','1666','1640','1617','1359','1245');
+
+commit;
+
+hadoop distcp -i hftp://trphadn01/smith/hdrim/rim/recalled_items hdfs://trihadn01/smith/hdrim/rim/
+
+
+scp hshaik0@trphada03.hadoop.searshc.com:/staging/netwatch/motorola/motorola_history/AvailabilityData_03162016.tar.gz hshaik0@trihadap01.vm.searshc.com:/staging/netwatch/motorola/
+ 
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/tmp_acc_pt_minut_brk_dn" -l1 "|" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s" -ip2 "/user/hshaik0/tmp_acc_pt_down_tm" -l2 "|" -op  "/user/hshaik0/error_records_shop" 
+
+
+/manu/opt/java6_64/bin
+
+ p_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand<
+/manu/opt/java6_64/bin/java -Xms512M -Xmx1536M -cp /dprp/properties:/dprp/lib/idrp_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand

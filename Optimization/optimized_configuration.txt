@@ -1,0 +1,113 @@
+Configurations to Check
+
+
+SET io.compression.codec.lzo.class com.hadoop.compression.lzo.LzoCodec
+SET pig.tmpfilecompression true
+SET pig.tmpfilecompression.codec lzo
+
+add it
+
+filtered_vend_packs = FILTER smith__idrp_vend_pack_combined_data  by (TRIM(ksn_purchase_status_cd) != 'U') ;
+
+add it
+
+test_data_1234 = UNION t_data_1, t_data_2, t_data_3 PARALLEL 500;
+
+add it if required 
+
+
+
+set mapred.min.split.size 524288;
+
+
+rev_dtc_file11 = JOIN rev_dtc_file BY REV_ITEM, hier_item_data_required BY H_ITEM_ID using 'skewed';
+Newer Code:-
+rev_dtc_file11 = JOIN hier_item_data_required BY H_ITEM_ID, rev_dtc_file BY REV_ITEM;
+
+
+input_join = JOIN input_req_gen BY ITEM_ID, sbt_ord_join1 BY sbt_vend_join1::filtered_vend_packs::shc_item_id using 'replicated';
+
+
+
+
+
+and make schema files ,
+ pig files,
+ change the locations in schema files
+ import the data to that locations
+ change the store locations
+ 
+ 
+/appl/hdidrp/pig/scripts/item_eligibility/srsvndrpklocn/work__idrp_sears_vendor_package_location/perform_item_eligibility_srsvndrpklocn_work__idrp_sears_vendor_package_location.pig
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 11114804 records (8732077328 bytes) from: "/smith/idrp/vend_pack_combined"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 165358 records from: "/smith/idrp/eligible_loc"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 56144208 records from: "/work/idrp/sourced_sears_location"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 19642698 records from: "/smith/idrp/vend_pack_dc_combined"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 8211377 records from: "/smith/idrp/shc_item_combined"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 3054689 records from: "/smith/idrp/ksn_attribute/current"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully read 7493821 records from: "/smith/idrp/scan_based_trading_sears_location/current"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr)
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Output(s):
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr) Successfully stored 55993919 records (18033739496 bytes) in: "/work/idrp/sears_vendor_package_location"
+INFO  06-01 13:07:50,673 - Shell_Trigger - (stderr)
+
+
+/appl/hdidrp/pig/scripts/item_eligibility/srsvndrpklocn/work__idrp_sourced_sears_location/perform_item_eligibility_srsvndrpklocn_work__idrp_sourced_sears_location.pig
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Input(s):
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Successfully read 51858880 records from: "/work/idrp/sourced_sears_store"
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Successfully read 66022 records from: "/work/idrp/sourced_sears_import_center"
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Successfully read 4184142 records from: "/work/idrp/sourced_sears_warehouse"
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Successfully read 11 records from: "/work/idrp/amz"
+INFO  06-01 12:37:53,972 - Shell_Trigger - (stderr) Successfully read 3054689 records from: "/smith/idrp/ksn_attribute/current"
+INFO  06-01 12:37:53,973 - Shell_Trigger - (stderr)
+INFO  06-01 12:37:53,973 - Shell_Trigger - (stderr) Output(s):
+INFO  06-01 12:37:53,973 - Shell_Trigger - (stderr) Successfully stored 56144208 records (10568527388 bytes) in: "/work/idrp/sourced_sears_location"
+
+
+/appl/hdidrp/pig/scripts/item_eligibility/srsvndrpklocn/work__idrp_sears_vendor_package_exploding_assortment_location/perform_item_eligibility_srsvndrpklocn_work__idrp_sears_vendor_package_exploding_assortment_location.pig
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Input(s):
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 591096 records from: "/smith/idrp/core_ima_assortments_prepacks_exploding_assortment/current"
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 55993919 records from: "/work/idrp/sears_vendor_package_location"
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 11114804 records from: "/smith/idrp/vend_pack_combined"
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 19642698 records from: "/smith/idrp/vend_pack_dc_combined"
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 8211377 records from: "/smith/idrp/shc_item_combined"
+INFO  06-01 13:23:03,853 - Shell_Trigger - (stderr) Successfully read 3054689 records from: "/smith/idrp/ksn_attribute/current"
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr) Successfully read 27 records (1154 bytes) from: "/work/idrp/dummy_vend_whse_ref"
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr) Successfully read 19998 records (612796 bytes) from: "/work/idrp/sears_location_xref"
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr) Successfully read 165358 records from: "/smith/idrp/eligible_loc"
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr)
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr) Output(s):
+INFO  06-01 13:23:03,854 - Shell_Trigger - (stderr) Successfully stored 1456724 records (379156671 bytes) in: "/work/idrp/sears_vendor_package_exploding_assortment_location"
+
+
+/appl/hdidrp/pig/scripts/item_eligibility/srsvndrpklocn/work__idrp_candidate_sears_warehouse/perform_item_eligibility_srsvndrpklocn_work__idrp_candidate_sears_warehouse.pig
+didate_sears_warehouse_import_items,work__idrp_candidate_sears_warehouse        HASH_JOIN       /work/idrp/candidate_sears_warehouse,
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr)
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Input(s):
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 377104 records (127438798 bytes) from: "/gold/item/aprk/current"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 19998 records (612796 bytes) from: "/work/idrp/sears_location_xref"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 7782665 records from: "/gold/inventory/dc/sears_item_facility/current"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 8179911 records from: "/gold/inventory/dc/sears_item_owner_current"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 7214229 records from: "/gold/inventory/srim/daily_inventory"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully read 3054689 records from: "/smith/idrp/ksn_attribute/current"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr)
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Output(s):
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully stored 4187895 records (1082504574 bytes) in: "/work/idrp/candidate_sears_warehouse"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr) Successfully stored 81176 records (6396817 bytes) in: "/work/idrp/candidate_sears_warehouse_missing_source_error"
+INFO  06-01 11:48:47,462 - Shell_Trigger - (stderr)
+
+/appl/hdidrp/pig/scripts/item_eligibility/srsvndrpklocn/smith__idrp_eligible_sears_vendor_package_location_current/perform_item_eligibility_srsvndrpklocn_smith__idrp_eligible_sears_vendor_package_location_current.pig
+ INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr)
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Input(s):
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully read 165358 records (41715681 bytes) from: "/smith/idrp/eligible_loc"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully read 575881 records (158537043 bytes) from: "/work/idrp/sears_vendor_package_vendor_location"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully read 1456724 records (379170546 bytes) from: "/work/idrp/sears_vendor_package_exploding_assortment_location"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully read 55993919 records (18040294338 bytes) from: "/work/idrp/sears_vendor_package_location"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully read 3054689 records from: "/smith/idrp/ksn_attribute/current"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr)
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Output(s):
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully stored 36550993 records (8717863535 bytes) in: "/work/idrp/netapp_ext_srs_vp_loc"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully stored 58026524 records (19767237548 bytes) in: "/smith/idrp/eligible_sears_vendor_package_location/current"
+INFO  06-01 13:34:19,126 - Shell_Trigger - (stderr) Successfully stored 20401739 records (4847437969 bytes) in: "/work/idrp/netapp_ext_srs_vp_str"
+
+ 

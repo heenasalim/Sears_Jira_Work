@@ -1,0 +1,79 @@
+
+
+
+collect_history master
+/logs/hdidrp/Hadoop_JDA_collect_sales_history_Master20190111081234.log
+Interface Name is Pkj_Hadoop_JDA_collect_sales_history_Master
+/smith/idrp/sales_history
+
+
+8020/smith/idrp/sales_history/.hive-staging_hive_2019-01-11_10-31-07_440_654076284717058942-1/-ext-10000/sales_data_source_cd
+
+
+collect history /smith/idrp/sales_history/.hive-staging_hive_2019-01-11_10-31-07_440_654076284717058942-1/-ext-10000/sales_data_source_cd=P/week_start_dt=2018-12-30
+
+
+for L region 
+
+/logs/hdidrp/Hadoop_Jda_Lost_sales_idrp_Master20190110005632.log
+
+
+sales_data_source_cd
+
+
+
+
+/work/idrp/lost_sales/sales_history
+to 
+/work/idrp/lost_sales_history 
+
+
+
+table work__idrp_normalize_sales_history
+
+
+
+hive -e "SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+SET hive.merge.mapredfiles = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+SET hive.merge.mapredfiles = true;
+SET hive.exec.max.dynamic.partitions = 1000;
+SET hive.exec.max.dynamic.partitions.pernode = 500;
+FROM $table_name a
+INSERT OVERWRITE TABLE smith__idrp_sales_history
+PARTITION(sales_data_source_cd,week_start_dt)
+SELECT
+load_ts,
+ksn_id,
+sears_division_item_sku_desc,
+sears_ringing_facility_id_nbr,
+sears_delivery_facility_id_nbr,
+shc_ringing_location_nbr,
+shc_delivery_location_nbr,
+demand_group_cd,
+sales_transaction_type_cd,
+merchandise_status_cd,
+on_promotion_ind,
+                 
+
+
+
+/logs/hdidrp/Hadoop_Normalization_Sales_Hist_Master20190111104017.log 
+ work__idrp_normalize_sales_history   /work/idrp/normsaleshistory/norm_output
+work__idrp_normalize_sales_history_adhoc               /work/idrp/normsaleshistory/adhoc_output
+
+
+WORK__IDRP_LOST_SALES_HISTORY
+
+
+
+
+
+select transaction_dt, count(*) from 
+WORK__IDRP_LOST_SALES_HISTORY 
+where 
+sales_data_source_cd='L'
+and TO_DATE(from_unixtime(UNIX_TIMESTAMP(transaction_dt, 'yyyy-MM-dd'))) between '2018-12-27' and '2019-01-10'
+group by transaction_dt
+order by transaction_dt;

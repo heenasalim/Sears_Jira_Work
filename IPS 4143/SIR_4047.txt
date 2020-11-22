@@ -1,0 +1,85 @@
+Log File :- /logs/hdidrp/perform_item_eligibility_smith__idrp_eligible_item_current_4.20190711174241.log
+
+/appl/hdidrp/bin/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_4.sh
+/appl/hdidrp/pig/scripts/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+/home/auto/hshaik0/2019_changes/SIR_4011_4017/perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf  
+-m /appl/conf/hdidrp/prod/USER.cfg 
+-m /appl/conf/hdidrp/prod/PROJECT.cfg 
+-m /appl/hdidrp/pig/params/shared/common.param 
+-m /appl/hdidrp/pig/params/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current.param 
+-m work__idrp_eligible_item_current_part_4.schema 
+-m smith__idrp_eligible_item_current.schema -p batchid=4047 -f perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+
+
+
+PROJECT_WORK_DIR/item_eligibility/item_current/stage4
+-m ${pig_params_file} 
+-m /appl/hdidrp/pig/schema/item_eligibility/work__idrp_eligible_item_current_part_4.schema
+-m /appl/hdidrp/pig/schema/smith__idrp_eligible_item_current.schema ${pig_script_file}
+${PIG_PARAMS_DIR}/${module_relative_path}/${script_name_param}.param
+
+
+
+
+
+Input  :- /work/idrp//item_eligibility/item_current/stage4
+
+Output :-SMITH__IDRP_ELIGIBLE_ITEM_CURRENT_LOCATION=/smith/idrp/eligible_item/current
+
+/user/hshaik0/eligible_item/current
+
+2019-07-12 17:47:39^A10000080^ASPINNAKER NAVY      SZ 8.5^A35^AKM FOOTWEAR^A714^AMENS^A2574^ACASUALS^A42^AMEN'S CASUALS OXFORDS^A2^AUPDATED^A10000080^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A596.146^A2.646^A56862_S^ANANO STAR VENTUES LIMITED^A20381^A0^A0^A0^A0^A0^A1^A0^AN^AN^A^A^A0^A0^A0^ATW^A ^ASHARED^A^AA^ATYP^AA^ARSC^A^A^A^A^AK^A^AWG8801^A46615^AN^AK^A^A^A^A15.7150^A34.99^A8.5^ACLASSICS^A20381^A9^A^A90^A420202038114068^A20^A420202038114068-G1^ASPINNAKER NAVY^AIMPORT^ATHOM MCAN^ANAVY^A^AA^A2019-04-03-00:00:00^A^A^Aitem_eligibility_eligible_item20190712174621^A^A1^A^A^AN^A2.646^A15.95^A14.4^A2.6^AY^ANONE^A^A^ANONE^A^A^A^A^AN^AALLOC^A^A^A^A^A^A^A^A^A^A^AN^A10000080^A10000080^A^A0^AN^ANONE^A^A^ANONE^ANONE^A^A^ANONE
+
+
+
+hadoop distcp hdfs://trphadn01/work/idrp//item_eligibility/item_current/stage4 /work/idrp//item_eligibility/item_current/
+
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/smith/idrp/eligible_item/current" -l1 "^A" -0s,1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s,27s,28s,29s,30s,31s,32s,33s,34s,35s,36s,37s,38s,39s,40s,41s,42s,43s,44s,45s,46s,47s,48s,49s,50s,51s,52s,53s,54s,55s,56s,57s -ip2 "/user/hshaik0/eligible_item/current" -l2  "^A" -op  "/user/hshaik0/diff_tool_result_for_4047"  --overwrite
+Log File :- /logs/hdidrp/perform_item_eligibility_smith__idrp_eligible_item_current_4.20190711174241.log
+
+/appl/hdidrp/bin/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_4.sh
+/appl/hdidrp/pig/scripts/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+/home/auto/hshaik0/2019_changes/SIR_4011_4017/perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf  
+-m /appl/conf/hdidrp/prod/USER.cfg 
+-m /appl/conf/hdidrp/prod/PROJECT.cfg 
+-m /appl/hdidrp/pig/params/shared/common.param 
+-m /appl/hdidrp/pig/params/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current.param 
+-m work__idrp_eligible_item_current_part_4.schema 
+-m smith__idrp_eligible_item_current.schema -p batchid=4047 -f perform_item_eligibility_smith__idrp_eligible_item_current_4.pig
+
+
+
+PROJECT_WORK_DIR/item_eligibility/item_current/stage4
+-m ${pig_params_file} 
+-m /appl/hdidrp/pig/schema/item_eligibility/work__idrp_eligible_item_current_part_4.schema
+-m /appl/hdidrp/pig/schema/smith__idrp_eligible_item_current.schema ${pig_script_file}
+${PIG_PARAMS_DIR}/${module_relative_path}/${script_name_param}.param
+
+
+
+
+
+Input  :- /work/idrp//item_eligibility/item_current/stage4
+
+Output :-SMITH__IDRP_ELIGIBLE_ITEM_CURRENT_LOCATION=/smith/idrp/eligible_item/current
+
+/user/hshaik0/eligible_item/current
+
+2019-07-12 17:47:39^A10000080^ASPINNAKER NAVY      SZ 8.5^A35^AKM FOOTWEAR^A714^AMENS^A2574^ACASUALS^A42^AMEN'S CASUALS OXFORDS^A2^AUPDATED^A10000080^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A^A596.146^A2.646^A56862_S^ANANO STAR VENTUES LIMITED^A20381^A0^A0^A0^A0^A0^A1^A0^AN^AN^A^A^A0^A0^A0^ATW^A ^ASHARED^A^AA^ATYP^AA^ARSC^A^A^A^A^AK^A^AWG8801^A46615^AN^AK^A^A^A^A15.7150^A34.99^A8.5^ACLASSICS^A20381^A9^A^A90^A420202038114068^A20^A420202038114068-G1^ASPINNAKER NAVY^AIMPORT^ATHOM MCAN^ANAVY^A^AA^A2019-04-03-00:00:00^A^A^Aitem_eligibility_eligible_item20190712174621^A^A1^A^A^AN^A2.646^A15.95^A14.4^A2.6^AY^ANONE^A^A^ANONE^A^A^A^A^AN^AALLOC^A^A^A^A^A^A^A^A^A^A^AN^A10000080^A10000080^A^A0^AN^ANONE^A^A^ANONE^ANONE^A^A^ANONE
+
+
+
+hadoop distcp hdfs://trphadn01/work/idrp//item_eligibility/item_current/stage4 /work/idrp//item_eligibility/item_current/
+
+
+bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/smith/idrp/eligible_item/current" -l1 "^A" -0s,1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s,27s,28s,29s,30s,31s,32s,33s,34s,35s,36s,37s,38s,39s,40s,41s,42s,43s,44s,45s,46s,47s,48s,49s,50s,51s,52s,53s,54s,55s,56s,57s -ip2 "/user/hshaik0/eligible_item/current" -l2  "^A" -op  "/user/hshaik0/diff_tool_result_for_4047"  --overwrite
+
+
+

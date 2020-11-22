@@ -1,0 +1,35 @@
+--it show the data which are coming duplicate.
+
+select * from (
+SELECT /*+ parallel(s,12) */
+       s.Item                                              AS Item              ,
+       s.Source                                            AS Source            ,
+       s.Dest                                              AS Dest              ,
+       ul2.UDC_Loc_Fmt_Typ_Cd                               AS Source_Fmt        ,
+       n.TransLeadTime/1440                                AS NW_TransLeadTime  
+  FROM stsc.Sourcing  s  ,
+       stsc.Network   n  ,
+       stsc.udt_Item      i  ,
+       stsc.loc       l  ,
+       stsc.udt_loc   ul,
+       stsc.loc       l2,
+       stsc.udt_loc   ul2
+ WHERE s.Item            = i.Item
+   AND s.Dest            = l.Loc
+   AND s.Dest            = n.Dest
+   AND s.Source          = l2.Loc
+   AND s.Source          = n.Source
+   AND l.loc = ul.loc
+   AND l2.loc = ul2.loc
+   AND ul.UDC_Loc_Lvl_Cd <> 'STORE'
+   AND (
+        s.Disc           = TO_DATE('01-01-1970','MM-DD-YYYY')
+        OR
+        s.Disc           > l2.FrzStart
+        OR
+           (
+                s.Eff    > s.Disc
+            AND s.Disc  <> TO_DATE('01-01-1970','MM-DD-YYYY')
+           )
+       ))
+where (Item,Dest)  in(select ITEM,LOC from STSC.UDT_DATA_INTG_RPT_051619_1);

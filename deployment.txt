@@ -1,0 +1,23 @@
+
+
+Opent the Trusted,
+
+Open manifest
+
+edit the manifest
+add the filenames to add
+
+right click add
+
+OPEN server ridrpnpd
+open document and add the names and details 
+
+execute query on oracle server
+
+string
+test
+prod 
+
+
+
+phases promote completed 

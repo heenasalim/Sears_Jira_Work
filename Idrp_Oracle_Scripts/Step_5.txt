@@ -1,0 +1,578 @@
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT 'REPLENISHMENT DATA SETUP'                                 AS Data_Check_Type    ,
+       'SOURCING'                                                 AS Data_Check_Subtype ,
+       a.Item                                                     AS Item               ,
+       a.Dest                                                     AS Loc                ,
+       a.UDC_Loc_Fmt_Typ_Cd                                       AS Dest_Format        ,
+       a.UDC_Loc_Lvl_Cd                                           AS Dest_Level         ,
+       a.UDC_Itm_Cs_Fl                                            AS CS_Fl              ,
+       a.UDC_Itm_Typ_Ds                                           AS Item_Type          ,
+       'NA'                                                       AS PO_Vnd_No          ,
+       'NA'                                                       AS Par_Vnd_No         ,
+       a.COUNT                                                    AS Qty                ,
+       a.Data_Check_Result                                        AS Data_Check_Result
+  FROM (
+        SELECT /*+ parallel(s,12) */
+               s.Item                                    ,
+               s.Dest                                    ,
+               ul.UDC_Loc_Lvl_Cd                          ,
+               ul.UDC_Loc_Fmt_Typ_Cd                      ,
+               i.UDC_Itm_CS_Fl                           ,
+               i.UDC_Itm_Typ_Ds                          ,
+               COUNT(*)             AS COUNT             ,
+               MAX(
+                   CASE
+                        WHEN s.Disc = TO_DATE('01-01-1970','MM-DD-YYYY')
+                        THEN 'EXCPTN 19 - Active Store SKUs with dual inbound sourcing'
+                        ELSE 'EXCPTN 20 - Active Store SKUs with dual inbound sourcing with future discontinue date as well'
+                         END
+                  )                 AS Data_Check_Result 
+          FROM stsc.Sourcing  s ,
+               stsc.Loc       l ,
+               stsc.udt_loc   ul,
+               stsc.udt_Item      i
+         WHERE s.Dest           = l.Loc
+           AND s.Item           = i.Item
+           AND l.loc            = ul.loc
+           AND ul.UDC_Loc_Lvl_Cd = 'STORE'
+           AND (
+                s.Disc          = TO_DATE('01-01-1970','MM-DD-YYYY')
+                OR
+                s.Disc          > l.FrzStart                         /* Still technically active */
+               )
+         GROUP BY
+               s.Item               ,
+               s.Dest               ,
+               ul.UDC_Loc_Lvl_Cd     ,
+               ul.UDC_Loc_Fmt_Typ_Cd ,
+               i.UDC_Itm_CS_Fl      ,
+               i.UDC_Itm_Typ_Ds
+        HAVING COUNT(*) > 1
+       ) a
+;
+
+COMMIT;
+
+
+ANALYZE table STSC.UDT_DATA_INTG_RPT
+        COMPUTE STATISTICS
+;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE STORE LEVEL SKUS WITH FUTURE DISCONTINUED ROWS IN
+-- STSC.SOURCING
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+--
+-- TEMPORARILY ENABLE THE CONSTRAINT / INDEX TO SPEED UP THE
+-- QUERY AGAINST THE STSC.UDT_DATA_INTG_RPT TABLE BELOW:
+--
+
+  ALTER table STSC.UDT_DATA_INTG_RPT 
+ ENABLE constraint DATA_INTG_RPT_PK  ;
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT 'REPLENISHMENT DATA SETUP'                                         AS Data_Check_Type    ,
+       'SOURCING'                                                         AS Data_Check_Subtype ,
+       a.Item                                                             AS Item               ,
+       a.Dest                                                             AS Loc                ,
+       a.UDC_Loc_Fmt_Typ_Cd                                               AS Dest_Format        ,
+       a.UDC_Loc_Lvl_Cd                                                   AS Dest_Level         ,
+       a.UDC_Itm_Cs_Fl                                                    AS CS_Fl              ,
+       a.UDC_Itm_Typ_Ds                                                   AS Item_Type          ,
+       'NA'                                                               AS PO_Vnd_No          ,
+       'NA'                                                               AS Par_Vnd_No         ,
+       0                                                                  AS Qty                ,
+       'EXCPTN 21 - Store SKUs with future discontinued inbound Sourcing' AS Data_Check_Result
+  FROM (
+        SELECT /*+ parallel(s,12) */
+               s.Item                        ,
+               s.Dest                        ,
+               ul.UDC_Loc_Lvl_Cd              ,
+               ul.UDC_Loc_Fmt_Typ_Cd          ,
+               i.UDC_Itm_CS_Fl               ,
+               i.UDC_Itm_Typ_Ds              
+          FROM stsc.Sourcing  s ,
+               stsc.Loc       l ,
+               stsc.udt_loc   ul,
+               stsc.udt_Item      i
+         WHERE s.Dest               = l.Loc
+           AND s.Item               = i.Item
+           AND l.loc                = ul.loc
+           AND ul.UDC_Loc_Lvl_Cd     = 'STORE'
+           AND s.Disc               > l.FrzStart
+           AND (s.Item,s.Dest) NOT IN (
+                                       SELECT Item , Loc
+                                         FROM STSC.UDT_DATA_INTG_RPT
+                                        WHERE Data_Check_Result LIKE 'EXCPTN 20%'
+                                      )
+        ) a
+;
+
+COMMIT;
+
+
+--
+-- DISABLE THE CONSTRAINT / INDEX AGAIN TO SPEED UP 
+-- SUBSEQUENT INSERTS INTO THE STSC.UDT_DATA_INTG_RPT 
+-- TABLE:
+--
+
+  ALTER table STSC.UDT_DATA_INTG_RPT 
+DISABLE constraint DATA_INTG_RPT_PK  ;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE NON-STORE-LEVEL PLANORDER RECORDS WITH NEGATIVE 
+-- QTY VALUES
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT /*+ parallel(a,12) */
+       'SUPPLY DATA INTEGRITY'              AS Data_Check_Type    ,
+       'PLANORDER'                          AS Data_Check_Subtype ,
+       a.Item                               AS Item               ,
+       a.Loc                                AS Loc                ,
+       c.UDC_Loc_Fmt_Typ_Cd                 AS Dest_Format        ,
+       c.UDC_Loc_Lvl_Cd                     AS Dest_Level         ,
+       d.UDC_Itm_CS_Fl                      AS CS_Fl              ,
+       d.UDC_Itm_Typ_Ds                     AS Item_Type          ,
+       b.UDC_PO_Vnd_No                      AS PO_Vnd_No          ,
+       d.UDC_Itm_Vnd_No                     AS Par_Vnd_No         ,
+       SUM(a.Qty)                           AS Qty                ,
+       'EXCPTN 22 - Negative PlanOrder Qty' AS Data_Check_Result
+  FROM stsc.PlanOrder a ,
+       stsc.udt_SKU       b ,
+       stsc.udt_Loc       c ,
+       stsc.udt_Item      d
+ WHERE a.Item            = b.Item
+   AND a.Item            = d.Item
+   AND a.Loc             = b.Loc
+   AND a.Loc             = c.Loc
+   AND a.Qty             < 0
+   AND c.UDC_Loc_Lvl_Cd <> 'STORE'
+ GROUP BY
+       a.Item
+      ,a.Loc 
+      ,c.UDC_Loc_Fmt_Typ_Cd 
+      ,c.UDC_Loc_Lvl_Cd   
+      ,d.UDC_Itm_CS_Fl   
+      ,d.UDC_Itm_Typ_Ds 
+      ,b.UDC_PO_Vnd_No 
+      ,d.UDC_Itm_Vnd_No
+;
+
+COMMIT;
+
+
+--
+-- CAPTURE DFUTOSKU ROWS THAT DO NOT HAVE ALLOCFACTORS
+-- THAT SUM TO 1.0 AT THE DFU LEVEL
+--
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT /*+ parallel(a,12) */
+       'REPLENISHMENT DATA SETUP'                        AS Data_Check_Type    ,
+       'DFUTOSKU'                                        AS Data_Check_Subtype ,
+       a.Item                                            AS Item               ,
+       a.DFULoc                                          AS Loc                ,
+       a.DMDGroup                                        AS Dest_Format        ,
+       'NA'                                              AS Dest_Level         ,
+       0                                                 AS CS_Fl              ,
+       'NA'                                              AS Item_Type          ,
+       'NA'                                              AS PO_Vnd_No          ,
+       'NA'                                              AS Par_Vnd_No         ,
+       SUM(AllocFactor)                                  AS Qty                ,
+       'EXCPTN 23 - SUM Allocfactor <> 1.0 at DFU Level' AS Data_Check_Result
+  FROM stsc.DFUToSKU a 
+ GROUP BY
+       'REPLENISHMENT DATA SETUP' ,
+       'DFUTOSKU_ALLOCFACTOR'     ,
+       a.ITEM                     ,
+       a.DFULOC                   ,
+       a.DMDGroup                 
+HAVING ROUND(SUM(AllocFactor),5) <> 0
+   AND ROUND(SUM(AllocFactor),5) <> 1.00000
+;
+
+COMMIT;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE DFUTOSKU ROWS FOR INACTIVE SKUS THAT HAVE
+-- AN ALLOCFACTOR > 0
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT /*+ parallel(a,12) */
+       'REPLENISHMENT DATA SETUP'                         AS Data_Check_Type    ,
+       'DFUTOSKU'                                         AS Data_Check_Subtype ,
+       a.Item                                             AS Item               ,
+       a.SKULoc                                           AS Loc                ,
+       a.DMDGroup                                         AS Dest_Format        ,
+       a.DFULoc                                           AS Dest_Level         ,
+       0                                                  AS CS_Fl              ,
+       'NA'                                               AS Item_Type          ,
+       'NA'                                               AS PO_Vnd_No          ,
+       'NA'                                               AS Par_Vnd_No         ,
+       AllocFactor                                        AS Qty                ,
+       'EXCPTN 24 - Inactive SKU with an Allocfactor > 0' AS Data_Check_Result
+  FROM stsc.DFUToSKU a ,
+       stsc.udt_SKU      b
+ WHERE a.Item        = b.Item
+   AND a.SKULoc      = b.Loc
+   AND b.UDC_Sts_Cd  = 'D'
+   AND a.AllocFactor > 0
+;
+
+COMMIT;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE ORDER ALLOWABLE DC LEVEL SKUS THAT HAVE AN 
+-- EXTERNALSKUSW = 1
+--
+--
+-- NOTE:  WE USE THIS TWO-TIER APPROACH TO GREATLY SPEED
+--        UP THIS STEP SINCE ANY DIRECT WHERE-CLAUSE
+--        REFERENCES TO THE EXTERNALSKUSW SEEM TO SLOW
+--        DOWN RUNTIMES SUBSTANTIALLY.
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+CREATE table stsc.DATA_INTG_RPT_STEP7 parallel (degree 12)
+    AS
+SELECT /*+ parallel(a,12) */
+       'REPLENISHMENT DATA SETUP' AS Data_Check_Type    ,
+       'SKU'                      AS Data_Check_Subtype ,
+       a.Item                     AS Item               ,
+       a.Loc                      AS Loc                ,
+       c.UDC_Loc_Fmt_Typ_Cd       AS Dest_Format        ,
+       c.UDC_Loc_Lvl_Cd           AS Dest_Level         ,
+       d.UDC_Itm_Cs_Fl            AS CS_Fl              ,
+       d.UDC_Itm_Typ_Ds           AS Item_Type          ,
+       a.UDC_PO_Vnd_No            AS PO_Vnd_No          ,
+       d.UDC_Itm_Vnd_No           AS Par_Vnd_No         ,
+       a.UDC_Ord_Alw_Fl           AS Qty                
+  FROM stsc.udt_SKU              a ,
+       stsc.udt_Loc              c ,
+       stsc.udt_Item             d
+ WHERE a.Item                = d.Item
+   AND a.Loc                 = c.Loc
+   AND c.UDC_Loc_Lvl_Cd      = 'WAREHOUSE'
+   AND c.UDC_Loc_Fmt_Typ_Cd <> 'IMPORT'
+   AND a.UDC_Ord_Alw_Fl      = 1
+;
+
+
+CREATE unique index stsc.DATA_INTG_RPT_STEP7_IDX
+    ON stsc.DATA_INTG_RPT_STEP7
+       (
+        Item ,
+        Loc               
+       )
+       PARALLEL
+       COMPUTE STATISTICS
+;
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT /*+ parallel(x,12) */
+       x.Data_Check_Type                                        ,
+       x.Data_Check_Subtype                                     ,
+       x.Item                                                   ,
+       x.Loc                                                    ,
+       x.Dest_Format                                            ,
+       x.Dest_Level                                             ,
+       x.CS_Fl                                                  ,
+       x.Item_Type                                              ,
+       x.PO_Vnd_No                                              ,
+       x.Par_Vnd_No                                             ,
+       y.ExternalSKUSw                                          ,
+       'EXCPTN 25 - Order Allowable SKU with ExternalSKUSw = 1'
+  FROM stsc.DATA_INTG_RPT_STEP7 x ,
+       stsc.SKUPlanningParam    y
+ WHERE x.Item          = y.Item
+   AND x.Loc           = y.Loc
+   AND y.ExternalSKUSw = 1
+;
+
+COMMIT;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE SS TABLE ROWS FOR L-STATUS STORES THAT HAVE
+-- A REORDER POINT QTY > 0
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       )
+SELECT /*+ parallel(a,12) */
+       'REPLENISHMENT DATA SETUP'                             AS Data_Check_Type    ,
+       'SS'                                                   AS Data_Check_Subtype ,
+       a.Item                                                 AS Item               ,
+       a.Loc                                                  AS Loc                ,
+       c.UDC_Loc_Fmt_Typ_Cd                                   AS Dest_Format        ,
+       c.UDC_Loc_Lvl_Cd                                       AS Dest_Level         ,
+       d.UDC_Itm_Cs_Fl                                        AS CS_Fl              ,
+       d.UDC_Itm_Typ_Ds                                       AS Item_Type          ,
+       a.UDC_PO_Vnd_No                                        AS PO_Vnd_No          ,
+       d.UDC_Itm_Vnd_No                                       AS Par_Vnd_No         ,
+       b.Qty                                                  AS Qty                ,
+       'EXCPTN 26 - L-Status Stores with a Reorder Point > 0' AS Data_Check_Result
+  FROM stsc.udt_SKU  a ,
+       stsc.SS   b ,
+       stsc.udt_Loc  c ,
+       stsc.udt_Item d
+ WHERE a.Item           = b.Item
+   AND a.Item           = d.Item
+   AND a.Loc            = b.Loc
+   AND a.Loc            = c.Loc
+   AND c.UDC_Loc_Lvl_Cd = 'STORE'
+   AND a.UDC_Src_Sts_Cd = 'L'
+   AND b.Eff            = TO_DATE('01-01-1970','MM-DD-YYYY')
+   AND b.Qty            > 0
+;
+
+COMMIT;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- CAPTURE SS TABLE ROWS FOR L-STATUS STORES THAT HAVE
+-- A INCREMENTAL PRESENTATION OR PROMO BUFFER QTY > 0
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+INSERT INTO STSC.UDT_DATA_INTG_RPT
+       (
+        Data_Check_Type    ,
+        Data_Check_Subtype ,
+        Item               ,
+        Loc                ,
+        Dest_Format        ,
+        Dest_Level         ,
+        CS_Fl              ,
+        Item_Type          ,
+        PO_Vnd_No          ,
+        Par_Vnd_No         ,
+        ReplenType         ,
+        Data_Check_Result
+       ) -- 6/12/2012 PawelS - changed hint to improve performance
+SELECT /*+ parallel(c,12) parallel(a,12) parallel(b,12) use_hash(a b c) */
+       'REPLENISHMENT DATA SETUP'                                     AS Data_Check_Type    ,
+       'SS'                                                           AS Data_Check_Subtype ,
+       a.Item                                                         AS Item               ,
+       a.Loc                                                          AS Loc                ,
+       c.UDC_Loc_Fmt_Typ_Cd                                           AS Dest_Format        ,
+       c.UDC_Loc_Lvl_Cd                                               AS Dest_Level         ,
+       d.UDC_Itm_Cs_Fl                                                AS CS_Fl              ,
+       d.UDC_Itm_Typ_Ds                                               AS Item_Type          ,
+       a.UDC_PO_Vnd_No                                                AS PO_Vnd_No          ,
+       d.UDC_Itm_Vnd_No                                               AS Par_Vnd_No         ,
+       SUM(b.Qty)                                                     AS Qty                ,
+       'EXCPTN 27 - L-Status Stores with an inc pres or promo buffer' AS Data_Check_Result
+  FROM stsc.udt_SKU  a ,
+       stsc.SS   b ,
+       stsc.udt_Loc  c ,
+       stsc.udt_Item d
+ WHERE a.Item            = b.Item
+   AND a.Item            = d.Item
+   AND a.Loc             = b.Loc
+   AND a.Loc             = c.Loc
+   AND c.UDC_Loc_Lvl_Cd  = 'STORE'
+   AND a.UDC_Src_Sts_Cd  = 'L'
+   AND b.Eff            <> TO_DATE('01-01-1970','MM-DD-YYYY')
+   AND b.Qty             > 0
+   AND b.UDC_Project    <> ' '
+ GROUP BY
+       'REPLENISHMENT DATA SETUP'                                     ,
+       'SS'                                                           ,
+       a.Item                                                         ,
+       a.Loc                                                          ,
+       c.UDC_Loc_Fmt_Typ_Cd                                           ,
+       c.UDC_Loc_Lvl_Cd                                               ,
+       d.UDC_Itm_Cs_Fl                                                ,
+       d.UDC_Itm_Typ_Ds                                               ,
+       a.UDC_PO_Vnd_No                                                ,
+       d.UDC_Itm_Vnd_No                                               ,
+       'EXCPTN 27 - L-Status Stores with an inc pres or promo buffer'
+;
+
+COMMIT;
+
+
+--
+-- ALTER SESSION TO DISABLE PARALLEL DDL and DML ACTIONS
+-- BEFORE ANALYZING FINAL TABLE:
+--
+
+
+  ALTER session DISABLE parallel DDL ;
+  ALTER session DISABLE parallel DML ;
+
+
+  ALTER table STSC.UDT_DATA_INTG_RPT 
+ ENABLE constraint DATA_INTG_RPT_PK  ;
+
+
+ANALYZE table STSC.UDT_DATA_INTG_RPT
+        COMPUTE STATISTICS
+;
+
+
+-- ***********************************************************
+-- ***********************************************************
+--
+-- DROP WORK TABLES TABLES THAT WE NO LONGER NEED:
+--
+-- ***********************************************************
+-- ***********************************************************
+
+
+  WHENEVER SQLERROR CONTINUE NONE
+
+  DROP table stsc.DATA_INTG_RPT_STEP1   ;
+  DROP table stsc.DATA_INTG_RPT_STEP2   ;
+  DROP table stsc.DATA_INTG_RPT_STEP3_1 ;
+  DROP table stsc.DATA_INTG_RPT_STEP3_2 ;
+  DROP table stsc.DATA_INTG_RPT_STEP4   ;
+  DROP table stsc.DATA_INTG_RPT_STEP5   ;
+  DROP table stsc.DATA_INTG_RPT_STEP6   ;
+  DROP table stsc.DATA_INTG_RPT_STEP7   ;
+
+
+commit;
+
+--Force complete the job
+
+

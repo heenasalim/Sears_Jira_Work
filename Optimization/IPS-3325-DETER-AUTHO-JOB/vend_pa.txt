@@ -1,0 +1,6 @@
+
+
+IDRP_LOST_SALES_HISTORY  
+DP-00-LOST_SALES_IDRP_MSTR 
+
+/logs/hdidrp/Hadoop_JDA_ItemEligibility_Master_Sears_Vendor_Pack20190117080528.log

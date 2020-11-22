@@ -1,0 +1,65 @@
+
+
+select * from stgmgr.job j, stgmgr.job_interface ji, stgmgr.batchctl b
+where j.job_name='Pkj_Hadoop_JDA_On_Hand_Sync_Master'
+and j.job_interface_id=ji.job_interface_id
+and ji.job_interface_id=b.job_interface_id
+order by batchctl_id desc;
+
+ 2)	To get the job event activity '
+select je.event_name,
+       jea.job_event_activity_id,
+       to_char(jea.create_ts, 'yyyy-mm-dd hh24:mi:ss'),
+       to_char(jea.update_ts, 'yyyy-mm-dd hh24:mi:ss'),
+       jes.description
+  from stgmgr.job_event          je,
+       STGMGR.job_event_activity jea,
+       stgmgr.job                j,
+       stgmgr.job_event_status   jes,
+       stgmgr.job_interface      ji
+ where j.job_name = 'Pkj_Hadoop_JDA_On_Hand_Sync_Master'
+   and j.job_interface_id = ji.job_interface_id
+   and jea.job_id = j.job_id
+   and jea.batchctl_id = '286798'
+   and je.job_event_id = jea.job_event_id
+   and jea.job_event_status_id = jes.job_event_status_id
+ order by 2 asc, 3; 
+ 
+/appl/hdidrp/idrpnpc/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh agghist Pkj_Hadoop_Jda_AggHistMaster_Part2.kjb /appl/conf/hdidrp/dev 
+
+select * from stgmgr.job_event_activity
+where batchctl_id ='115921'
+and job_event_activity_id= '913308';
+
+Update stgmgr.job_event_activity
+set job_event_status_id = 1
+where batchctl_id ='115921'
+and job_event_activity_id= '913308';
+
+
+3) cleaned up kettle entries 
+DELETE FROM stgmgr.job_event_activity WHERE batchctl_id = 115921;
+
+3) select job_name, job_interface_name, batchctl_id, batch_active_ind
+from STGMGR.job j,
+     STGMGR.job_interface ji,
+     STGMGR.batchctl b
+where j.job_name = 'Pkj_Hadoop_Jda_oo_Sync_Kmart_Transformation_Master'
+and j.job_interface_id=ji.job_interface_id
+and ji.job_interface_id=b.job_interface_id
+order by batchctl_id desc;
+
+
+Pkj_JobControl_Check_Archive_Parameter
+Shell_PerformAggHistTransformationPart1
+Shell_PerformAggHistTransformationPart2
+Shell_PerformAggHistTransformationPart3b
+Shell_PerformAggHistTransformationPart3a
+Shell_PerformAggHistTransformationPart3c
+Shell_PerformAggHistTransformationPart4
+Shell_PerformAggHistCDC
+Shell_Perform_Agghist_LoadReady_Split
+Shell_Perform_Agghist_checkInstance_value
+Pkj_JobControl_AggHist_Part2_GetMergeLoadReady
+Trn_Update_Parameter_Value_Archive_Agghist_Part2
+Trn_BatchControl_GenericCloseInitBatch

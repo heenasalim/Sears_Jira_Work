@@ -1,0 +1,280 @@
+create table STSC.UDT_DATA_INTG_RPT051619 as 
+select * from(
+SELECT /*+ parallel(a,12) */
+       'REPLENISHMENT DATA SETUP'                               AS Data_Check_Type            ,
+       'SOURCING'                                               AS Data_Check_Subtype         ,
+       a.Item                                                   AS Item                       ,
+       a.Loc                                                    AS Loc                        ,
+       a.ReplenType                                             AS ReplenType                 ,
+       a.Dest_Format                                            AS Dest_Format                ,
+       a.Dest_Level                                             AS Dest_Level                 ,
+       a.CS_Fl                                                  AS CS_Fl                      ,
+       a.Item_Type                                              AS Item_Type                  ,
+       a.PO_Vnd_No                                              AS PO_Vnd_No                  ,
+       a.Par_Vnd_No                                             AS Par_Vnd_No                 ,
+       a.Source_Fmt                                             AS Source_Fmt                 ,
+       a.Source_Lvl                                             AS Source_Lvl                 ,
+       a.Intended_Source_Loc                                    AS Intended_Source_Loc        ,
+       a.Intended_Source_In_SKU                                 AS Intended_Source_In_SKU     ,
+       a.Intended_Source_In_Network                             AS Intended_Source_In_Network ,
+       a.UnIntended_Source_In_SKU                               AS UnIntended_Source_In_SKU   ,
+       NVL(b.Source,'NULL_VALUE')                               AS Sourcing_Source            ,
+       b.Eff                                                    AS Sourcing_Eff               ,
+       b.Disc                                                   AS Sourcing_Disc              ,
+       a.PO_Vnd_Status                                          AS Root_Cause_Analysis        ,
+       CASE 
+            WHEN c.Dest                         IS NOT NULL
+            THEN
+                 'EXCPTN 1  - Dual-Sourced Active DC SKU - That is, a single active DC SKU has two active inbound Sourcing rows'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN d.Item                         IS NOT NULL
+            THEN
+                 'EXCPTN 2  - Item with Non-Unique Active stsc.Sourcing.Source values across its various active Vendor-sourced DC SKUs'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN b.Eff                           > b.Disc
+             AND b.Disc                         <> TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN 
+                 'EXCPTN 3  - Discontinued Sourcing row with an Eff date > Disc date - Plan/Deployment will treat as active'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Dest_Format                   = 'RRC'
+             AND b.Source_lvl                    = 'WAREHOUSE'
+             AND b.Source_Fmt                   <> 'IMPORT'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 4  - RRC with active inbound Sourcing to another DC'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Dest_Format                   = 'CDFC'
+             AND b.Source_Fmt                    = 'IMPORT'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 5  - CDFC with active inbound Sourcing to a TF Ctr'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                NOT IN ('EMP','RSOS')
+             AND a.Dest_Format                   = 'CDFC'
+             AND a.Source_Lvl                    = 'WAREHOUSE'
+             AND a.Source_Fmt                   <> 'IMPORT'
+             AND (
+                     b.Source                   IS NULL
+                  OR b.Disc                     <> TO_DATE('01-01-1970','MM-DD-YYYY')
+                 )
+            THEN
+                 'EXCPTN 6  - DC-sourced CDFC SKU with missing inbound Sourcing - Non-EMP/RSOS'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'DOMESTIC'
+             AND b.Source_Fmt                   IN ('IMPORT','RD')
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 7  - DOMESTIC Item with active inbound Sourcing from a Vendor or Import Ctr'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                NOT IN ('EMP','RSOS')
+             AND a.Intended_Source_In_SKU       <> 'NULL_VALUE'
+             AND b.Source                       <> a.Intended_Source_In_SKU
+             AND a.PO_Vnd_Status          NOT LIKE '%Active RRC with a SKU UDC_PO_Vnd_No of another RRC%'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 8  - DC with misrouted active inbound Sourcing'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                NOT IN ('EMP','RSOS')
+             AND a.Intended_Source_In_SKU        = 'NULL_VALUE'
+             AND b.Source                       IS NOT NULL
+             AND a.PO_Vnd_Status          NOT LIKE '%Active RRC with a SKU UDC_PO_Vnd_No of another RRC%'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 9  - DC with active inbound Sourcing pointing to an inactive or missing Source SKU'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                NOT IN ('EMP','RSOS')
+             AND a.PO_Vnd_Status              LIKE '%Active RRC with a SKU UDC_PO_Vnd_No of another RRC%'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN
+                 'EXCPTN 10 - RRC with active inbound Sourcing but have a DC as their PO_Vnd_No - Possible Central Stocking Bug'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                    IN ('EMP','RSOS')
+             AND b.Source                       IS NOT NULL
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN 
+                 'EXCPTN 11 - EMP or RSOS Item at CDFC has active inbound DC Sourcing'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                    IN ('RAPID','CONSTRAINED')
+             AND a.PO_Vnd_Status               NOT LIKE '%Active RRC with a SKU UDC_PO_Vnd_No of another RRC%'
+             AND (
+                     b.Source                   IS NULL
+                  OR b.Disc                     <> TO_DATE('01-01-1970','MM-DD-YYYY')
+                 )
+            THEN 
+                 'EXCPTN 12 - RAPID or CONSTRAINED DC with missing inbound Sourcing - Results may include non-Vendor-Sourced SKUs'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'IMPORT'
+             AND b.Disc                          > b.Loc_FrzStart
+                                                -- 
+                                                -- Import Items must always have default dates for stsc.Sourcing.Disc to be active
+                                                -- 
+            THEN 
+                 'EXCPTN 13 - IMPORT Item with future discontinued inbound DC Sourcing - invalid for active IMPORT Items'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'IMPORT'
+             AND a.Dest_Format                  <> 'CDFC'
+             AND a.Source_Fmt                    = 'IMPORT'
+             AND b.Source                       IS NULL
+                                                -- 
+                                                -- Excludes future-discontinued TF Ctr-sourced Sourcing lanes which are captured in the 
+                                                -- Exception titled 'IMPORT Item with future discontinued inbound DC Sourcing - invalid 
+                                                -- for active IMPORT Items'
+                                                -- 
+            THEN 
+                 'EXCPTN 14 - IMPORT Item with missing or inactive inbound DC Sourcing from a TF Ctr'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'IMPORT'
+             AND a.Dest_Format                   = 'CDFC'
+             AND b.Source_Fmt                    = 'IMPORT'
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+                                                -- 
+                                                -- Excludes future-discontinued TF Ctr-sourced Sourcing lanes which are captured in the 
+                                                -- Exception titled 'IMPORT Item with future discontinued inbound DC Sourcing - invalid 
+                                                -- for active IMPORT Items'
+                                                -- 
+            THEN 
+                 'EXCPTN 15 - IMPORT Item at CDFC with active inbound DC Sourcing from a TF Ctr - invalid for CDFC'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'IMPORT'
+             AND a.Dest_Format                   = 'CDFC'
+             AND a.Source_Fmt                    = 'NULL_VALUE'
+             AND b.Source                       IS NULL
+                                                -- 
+                                                -- Excludes future-discontinued TF Ctr-sourced Sourcing lanes which are captured in the 
+                                                -- Exception titled 'IMPORT Item with future discontinued inbound DC Sourcing - invalid 
+                                                -- for active IMPORT Items'
+                                                -- 
+            THEN 
+                 'OK        - IMPORT Item at CDFC that is Vendor Sourced but no row exists in Sourcing - Consistent with business rules'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                     = 'CONSTRAINED'
+             AND b.Prepaid_Fl                    = 1
+             AND b.Source_Fmt                    = 'RD'
+             AND b.NW_TransLeadTime             <> 0
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN 
+                 'EXCPTN 16 - CONSTRAINED PREPAID Item with a non-zero Network TransLeadTime'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN b.Prepaid_Fl                    = 0
+             AND b.Source_Fmt                    = 'RD'
+             AND b.NW_TransLeadTime              = 0
+             AND b.Disc                          = TO_DATE('01-01-1970','MM-DD-YYYY')
+            THEN 
+                 'EXCPTN 17 - NON-PREPAID Item with a zero Network TransLeadTime'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.PO_Vnd_Status              LIKE 'ROOT_EXCPTN%'
+            THEN 
+                 'EXCPTN 18 - Invalid Loc, SKU or Network setup - Review Root_Cause_Analysis column for details'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.Item_Type                    <> 'IMPORT'
+             AND a.Source_Fmt                    = 'IMPORT'
+             AND b.Disc                          > b.Loc_FrzStart
+            THEN
+                 'EXCPTN 19 - NON-IMPORT DC Item with future discontinued Sourcing to a TF Ctr - Should no longer occur per updated rules'
+              --
+              -- ==========================================================================================================================
+              --
+            WHEN a.PO_Vnd_Status              LIKE 'NOTE%'
+                                                -- 
+                                                -- Doing this check here ensures that no Sourcing issues exist but SKU and Loc notes do 
+                                                -- exist
+                                                -- 
+            THEN 
+                 'NOTE      - Loc, SKU or Network setup conditions worth noting - Review Root_Cause_Analysis column for details'
+              --
+              -- ==========================================================================================================================
+              --
+            ELSE
+                 'OK        - All business rules satisfied'
+              --
+              -- ==========================================================================================================================
+              --
+             END                                                AS Data_Check_Result
+  FROM stsc.DATA_INTG_RPT_STEP5 a ,
+       stsc.DATA_INTG_RPT_STEP6 b ,
+       (
+            --
+            -- ESTABLISH A LIST OF ACTIVE DC SKUS THAT ARE ACTIVELY SOURCED
+            -- BY MORE THAN ONE STSC.SOURCING.SOURCE FOR THE SAME DC SKU
+            --
+        SELECT /*+ parallel(s,12) */
+               s.Item   ,
+               s.Dest   ,
+               COUNT(*)
+          FROM stsc.Sourcing  s ,
+               stsc.udt_Loc       l  
+         WHERE s.Dest                = l.Loc
+           AND l.UDC_Loc_Lvl_Cd      = 'WAREHOUSE'
+           AND l.UDC_Loc_Fmt_Typ_Cd <> 'IMPORT'
+           AND S.Disc                = TO_DATE('01-01-1970','MM-DD-YYYY')
+         GROUP BY
+               s.Item ,
+               s.Dest
+        HAVING COUNT(*) > 1
+       ) c ,
+       (
+            --
+            -- ESTABLISH A LIST OF ITEMS WHOSE ACTIVE VENDOR-SOURCED DC SKUS
+            -- ARE ACTIVELY SOURCED BY MORE THAN ONE STSC.SOURCING.SOURCE
+            -- ACROSS ALL VENDOR-SOURCED DCS FOR THE SAME ITEM
+            --
+        SELECT /*+ parallel(t,12) */
+               t.Item   ,
+               COUNT(Distinct t.Source)
+          FROM stsc.Sourcing  t ,
+               stsc.udt_Loc       m ,
+               stsc.udt_Loc       n 
+         WHERE t.Dest                = m.Loc
+           AND t.Source              = n.Loc
+           AND m.UDC_Loc_Lvl_Cd      = 'WAREHOUSE'
+           AND m.UDC_Loc_Fmt_Typ_Cd <> 'IMPORT'
+           AND n.UDC_Loc_Fmt_Typ_Cd IN ('IMPORT','RD')
+           AND t.Disc                = TO_DATE('01-01-1970','MM-DD-YYYY')
+         GROUP BY
+               t.Item 
+        HAVING COUNT(Distinct t.Source) > 1
+       ) d 
+ WHERE a.Item                  = b.Item(+)
+   AND a.Item                  = c.Item(+)
+   AND a.Item                  = d.Item(+)
+   AND a.Loc                   = b.Dest(+)
+   AND a.Loc                   = c.Dest(+)
+   );

@@ -1,0 +1,6 @@
+create table STSC.UDT_DATA_INTG_RPT_051619_1 as 
+select ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT, count(1) cnt
+from STSC.UDT_DATA_INTG_RPT051619
+group by ITEM, LOC, DEST_FORMAT, DEST_LEVEL, DATA_CHECK_RESULT
+having count(1)>1
+order by count(1);

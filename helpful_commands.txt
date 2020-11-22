@@ -1,0 +1,256 @@
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/PerformTeradataImport.sh\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/collectsaleshist/perform_teradata_Sourcing.sh\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/collectsaleshist/perform_teradata_initial_Sourcing.sh\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/collectsaleshist/TDextractor.sh\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/shared/DPRP_TDUtils.pl\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/dot_com_supply/DPRP_TDUtils.pl\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +
+
+hadoop distcp -i hftp://trphadn01/smith/hdrim/rim/recalled_items hdfs://trihadn01/smith/hdrim/rim/
+
+
+scp hshaik0@trphada03.hadoop.searshc.com:/staging/netwatch/motorola/motorola_history/AvailabilityData_03162016.tar.gz hshaik0@trihadap01.vm.searshc.com:/staging/netwatch/motorola/
+
+hadoop distcp -i hftp://trphadn01/smith/hdrim/rim/recalled_items hdfs://trihadn01/smith/hdrim/rim/
+
+
+/logs/hdidrp/Pkj_Hadoop_JDA_ItemEligibility_Master_buildeligible.log_20190514:2019/05/14 08:37:47 - Shell_Trigger - (stdout) [2019-05-14 08:37:47]
+
+[/appl/hdidrp/bin/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_3.sh]
+[INFO]  Executing pig script with arguments -m 
+/appl/hdidrp/pig/params/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current.param 
+-m /appl/hdidrp/pig/schema/smith__idrp_ksn_attribute_current.schema
+-m /appl/hdidrp/pig/schema/work__idrp_item_hierarchy_combined_all_current.schema 
+-m /appl/hdidrp/pig/schema/gold__item_shc_hierarchy_current.schema
+-m /appl/hdidrp/pig/schema/gold__inventory_sears_dc_item_facility_current.schema 
+-m /appl/hdidrp/pig/schema/gold__item_attribute_relate_current.schema 
+-m /appl/hdidrp/pig/schema/gold__item_package_current.schema 
+-m /appl/hdidrp/pig/schema/smith__idrp_item_eligibility_batchdate.schema 
+-m /appl/hdidrp/pig/schema/smith__idrp_vend_pack_combined.schema
+-m /appl/hdidrp/pig/schema/smith__idrp_i2k_valid_rebuy_vendor_package_ids_current.schema 
+ 
+ 
+/appl/hdidrp/pig/scripts/item_eligibility/smith__idrp_eligible_item_current/perform_item_eligibility_smith__idrp_eligible_item_current_3.pig
+
+
+
+scp hshaik0@trphada03.hadoop.searshc.com:/staging/netwatch/motorola/motorola_history/AvailabilityData_03162016.tar.gz hshaik0@trihadap01.vm.searshc.com:/staging/netwatch/motorola/
+
+ bash /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/work/idrp/item_eligibility/item_current/stage3"  -l1  "|" -c 0s,1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s,18s,19s,20s,21s,22s,23s,24s,25s,26s,27s,28s,29s,30s,31s,32s,33s,34s,35s,36s,37s,38s,39s,40s,41s,42s,43s,44s,45s,46s,47s,48s,49s,50s,51s,52s,53s,54s,55s,56s,57s -ip2 "/user/hshaik0/work__idrp_eligible_item_vend_pack_attribute_step4" -l2  "|" -op  "/user/hshaik0/diff_tool_result_for_4011"  --overwrite
+
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/tmp_acc_pt_minut_brk_dn" -l1 "|" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s" -ip2 "/user/hshaik0/tmp_acc_pt_down_tm" -l2 "|" -op  "/user/hshaik0/error_records_shop" 
+
+
+/manu/opt/java6_64/bin
+
+ p_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand<
+/manu/opt/java6_64/bin/java -Xms512M -Xmx1536M -cp /dprp/properties:/dprp/lib/idrp_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/tmp_acc_pt_minut_brk_dn" -l1 "|" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s" -ip2 "/user/hshaik0/tmp_acc_pt_down_tm" -l2 "|" -op  "/user/hshaik0/error_records_shop" 
+
+
+/manu/opt/java6_64/bin
+
+ p_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand<
+/manu/opt/java6_64/bin/java -Xms512M -Xmx1536M -cp /dprp/properties:/dprp/lib/idrp_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommands
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf -m /appl/conf/hdidrp/prod/USER.cfg -m /appl/conf/hdidrp/prod/PROJECT.cfg -m /appl/hdidrp/pig/params/shared/common.param -m /home/auto/hshaik0/allc*2/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.param  -m /home/auto/hshaik0/allc*2/smith__idrp_space_planning_authorized_vendor_package_stores_current.schema -m /home/auto/hshaik0/allc*2/work__idrp_items_vend_packs_can_carry.schema -m /home/auto/hshaik0/allc*2/smith__idrp_vend_pack_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_eligible_loc.schema -m /home/auto/hshaik0/allc*2/smith__idrp_shc_item_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_ksn_attribute_current.schema -m /home/auto/hshaik0/allc*2/gold__geographic_model_store.schema -p batchid=15800 -f  /home/auto/hshaik0/allc*2/production.pig
+
+in above code we need to add  "/smith/idrp/eligible_loc" 
+/gold/geographic/model_store"
+ "/smith/idrp/ksn_attribute/current"
+ to /user/hshaik0  then use it
+ 
+  SHC_WIFI_ACCESS_PT_AVAIL
+ 
+ REGISTER $UDF_JAR;
+DEFINE AddDays com.searshc.supplychain.idrp.udf.AddOrRemoveDaysToDate();
+SET default_parallel 300;
+--set io.sort.mb 1024
+set io.compression.codec.lzo.class com.hadoop.compression.lzo.LzoCodec
+set pig.tmpfilecompression true
+set pig.tmpfilecompression.codec lzo
+set mapred.child.java.opts -Xmx4096m
+set mapred.compress.map.output true
+--set pig.cachedbag.memusage 0.15
+set io.sort.factor 100
+--set opt.multiquery false
+SET mapred.max.split.size 134217728
+SET pig.maxCombinedSplitSize 4000000
+SET mapreduce.map.java.opts: -Xmx3072m
+SET mapreduce.reduce.java.opts: -Xmx6144
+
+
+REGISTER $UDF_JAR;
+DEFINE AddDays com.searshc.supplychain.idrp.udf.AddOrRemoveDaysToDate();
+SET default_parallel 300;
+--set io.sort.mb 1024
+set io.compression.codec.lzo.class com.hadoop.compression.lzo.LzoCodec
+set pig.tmpfilecompression true
+set pig.tmpfilecompression.codec lzo
+set mapred.child.java.opts -Xmx4096m
+set mapred.compress.map.output true
+--set pig.cachedbag.memusage 0.15
+set io.sort.factor 100
+--set opt.multiquery false
+SET mapred.max.split.size 134217728
+SET pig.maxCombinedSplitSize 4000000
+SET mapreduce.map.java.opts: -Xmx3072m
+SET mapreduce.reduce.java.opts: -Xmx6144m
+ 
+ 
+ 
+scp hshaik0@trphadap04.vm.searshc.com:/dprp/idrppsd/data/EXT_OFFER* hshaik0@trihadap01.vm.searshc.com:/dprp/idrpnpd/data
+scp hshaik0@trphadap04.vm.searshc.com:/dprp/idrppsc/data/EXT_OFFER* hshaik0@trihadap01.vm.searshc.com:/dprp/idrpnpc/data
+scp hshaik0@trphadap04.vm.searshc.com:/dprp/idrppsb/data/EXT_OFFER* hshaik0@trihadap01.vm.searshc.com:/dprp/idrpnpb/data
+scp hshaik0@trphadap04.vm.searshc.com:/dprp/idrppsa/data/EXT_OFFER* hshaik0@trihadap01.vm.searshc.com:/dprp/idrpnpa/data
+find /logs/hdidrp/*2019* -type f -exec grep -l '/appl/hdidrp/bin/SS_Kmart_Cutover/Custom_TDImport_FTCD.sh\|TERADATA_USER\|DPRP_TD_UTIL.cfg\|TDUTIL\|TERADATA_DBC_NAME' {} +s
+
+5_years=$( date -d "${current_date} -1835 days" +'%Y' )
+months=$( date -d "${current_date} -1835 days" +'%m' )
+days=$( date -d "${current_date} -1835 days" +'%d' )
+
+echo $5_years
+for ((i=months,j=days;i<=12,j<=31;i++,j++))
+{hadoop fs -ls /smith/idrp/sales_history/*5_years*$i*$j/*
+}
+
+
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf -m /appl/conf/hdidrp/prod/USER.cfg -m /appl/conf/hdidrp/prod/PROJECT.cfg -m /appl/hdidrp/pig/params/shared/common.param -m /home/auto/hshaik0/allc*2/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.param  -m /home/auto/hshaik0/allc*2/smith__idrp_space_planning_authorized_vendor_package_stores_current.schema -m /home/auto/hshaik0/allc*2/work__idrp_items_vend_packs_can_carry.schema -m /home/auto/hshaik0/allc*2/smith__idrp_vend_pack_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_eligible_loc.schema -m /home/auto/hshaik0/allc*2/smith__idrp_shc_item_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_ksn_attribute_current.schema -m /home/auto/hshaik0/allc*2/gold__geographic_model_store.schema -p batchid=15800 -f  /home/auto/hshaik0/allc*1/production.pig
+
+
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf -m /appl/conf/hdidrp/prod/USER.cfg -m /appl/conf/hdidrp/prod/PROJECT.cfg -m /appl/hdidrp/pig/params/shared/common.param -m /home/auto/hshaik0/allc*2/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.param  -m /home/auto/hshaik0/allc*2/smith__idrp_space_planning_authorized_vendor_package_stores_current.schema -m /home/auto/hshaik0/allc*2/work__idrp_items_vend_packs_can_carry.schema -m /home/auto/hshaik0/allc*2/smith__idrp_vend_pack_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_eligible_loc.schema -m /home/auto/hshaik0/allc*2/smith__idrp_shc_item_combined.schema -m /home/auto/hshaik0/allc*2/smith__idrp_ksn_attribute_current.schema -m /home/auto/hshaik0/allc*2/gold__geographic_model_store.schema -p batchid=15800 -f  /home/auto/hshaik0/allc*2/sampple_test152.pig
+
+
+
+SHC_WIFI_ACCESS_PT_AVAIL
+
+
+Hi Maureen ,
+
+I have work opn the script and i got total 8 minutes of improvement on 30 minutes
+I am further testing the script for new possibilities
+.
+
+
+About ,
+
+
+next jira I am done with /tmp cleanup that day only
+I will ask users to provide unuseful hdidrp files.
+For log files and hdfs and futers tmp files  cleanup i will gereate automatic script through new job.
+
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/production" -l1 "\u0001" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s" -ip2 "/smith/idrp/space_planning_vendor_package_stores/current" -l2 "\u0001" -op  "/user/hshaik0/optimize_deter_autho"
+INFO  06-12 09:55:11,071 - Shell_Trigger - (stderr) Successfully stored 439809785 records (40870534187 bytes) in: "/smith/idrp/space_planning_vendor_package_stores/curr
+
+
+
+
+SET hive.exec.dynamic.partition = true;
+    SET hive.exec.dynamic.partition.mode = nonstrict;
+    SET hive.merge.mapredfiles = true;
+    FROM work__idrp_sales_history
+    INSERT OVERWRITE TABLE smith__idrp_sales_history
+    PARTITION(sales_data_source_cd,week_start_dt)
+    SELECT load_ts,
+        ksn_id,
+        sears_division_item_sku_desc,
+        sears_ringing_facility_id_nbr,
+        sears_delivery_facility_id_nbr,
+        shc_ringing_location_nbr,
+        shc_delivery_location_nbr,
+        demand_group_cd,
+        sales_transaction_type_cd,
+        merchandise_status_cd,
+        on_promotion_ind,
+        scim_ind,
+        customer_zip_cd,
+        transaction_dt,
+        actual_sale_qty,
+        lift_sale_qty,
+        lost_sale_qty,
+        selling_amt,
+        regular_price_amt,
+        idrp_batch_id,
+        sales_data_source_cd,
+        week_start_dt;
+		
+		hive -e "SET hive.exec.dynamic.partition = true;
+    SET hive.exec.dynamic.partition.mode = nonstrict;
+    SET hive.merge.mapredfiles = true;
+    FROM work__idrp_sales_history
+    INSERT OVERWRITE TABLE smith__idrp_sales_history
+    PARTITION(sales_data_source_cd,week_start_dt)
+    SELECT load_ts,
+        ksn_id,
+        sears_division_item_sku_desc,
+        sears_ringing_facility_id_nbr,
+        sears_delivery_facility_id_nbr,
+        shc_ringing_location_nbr,
+        shc_delivery_location_nbr,
+        demand_group_cd,
+        sales_transaction_type_cd,
+        merchandise_status_cd,
+        on_promotion_ind,
+        scim_ind,
+        customer_zip_cd,
+        transaction_dt,
+        actual_sale_qty,
+        lift_sale_qty,
+        lost_sale_qty,
+        selling_amt,
+        regular_price_amt,
+        idrp_batch_id,
+        sales_data_source_cd,
+        week_start_dt;"
+
+ 
+ hive -e "select * from smith__idrp_sales_history"
+ hive -e "alter table smith__idrp_sales_history drop partition(week_start_dt<='2015-04-07');"
+ hive -e "select * from smith__idrp_sales_history where week_start_dt > '2015-04-07';"	
+		
+		date_sub(FROM_UNIXTIME(UNIX_TIMESTAMP(),'yyyy-MM-dd'), 1835)) 2015-04-07 
+		
+		
+		
+		[hdidrp@trihada01:/home/auto/hdidrp]:hive -e "Alter table smith__idrp_sales_history drop partition( week_start_dt < '2015-04-07' );"
+
+		
+		hive -e " select week_start_dt from smith__idrp_sales_history where week_start_dt < '2015-04-07';"
+		
+		
+FAILED: ParseException line 1:75 mismatched input '-' expecting ) near '2015' in drop partition statement
+[hdidrp@trihada01:/home/auto/hdidrp]:hive -e "Alter table smith__idrp_sales_history drop partition( week_start_dt <= '2015-04-07' );"
+
+
+Dropped the partition sales_data_source_cd=S/week_start_dt=2015-04-05s
+
+hadoop distcp -i hftp://trphadn01/smith/hdrim/rim/recalled_items hdfs://trihadn01/smith/hdrim/rim/
+
+
+scp hshaik0@trphada03.hadoop.searshc.com:/staging/netwatch/motorola/motorola_history/AvailabilityData_03162016.tar.gz hshaik0@trihadap01.vm.searshc.com:/staging/netwatch/motorola/
+ 
+
+
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/user/hshaik0/tmp_acc_pt_minut_brk_dn" -l1 "|" -c "2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s" -ip2 "/user/hshaik0/tmp_acc_pt_down_tm" -l2 "|" -op  "/user/hshaik0/error_records_shop" 
+
+
+/manu/opt/java6_64/bin
+
+ p_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand<
+/manu/opt/java6_64/bin/java -Xms512M -Xmx1536M -cp /dprp/properties:/dprp/lib/idrp_wnf.jar:/dprp/lib/log4j-1.2.13.jar:/dprp/lib/classes111.zip:/dprp/lib/commons-lang-2.3.jar:/dprp/lib/uncommons-maths-1.0.2.jar com.sears.idrp.command.WNFCommand

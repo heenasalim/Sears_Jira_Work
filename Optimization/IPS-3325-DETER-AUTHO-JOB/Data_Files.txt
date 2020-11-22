@@ -1,0 +1,163 @@
+
+
+ /home/auto/hshaik0/schema_files/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.param 
+ -m /home/auto/hshaik0/schema_files/smith__idrp_space_planning_authorized_vendor_package_stores_current.schema 
+ -m /home/auto/hshaik0/schema_files/work__idrp_items_vend_packs_can_carry.schema 
+ -m /home/auto/hshaik0/schema_files/smith__idrp_vend_pack_combined.schema 
+ -m /home/auto/hshaik0/schema_files/smith__idrp_eligible_loc.schema
+ -m /home/auto/hshaik0/schema_files/smith__idrp_shc_item_combined.schema 
+ -m /home/auto/hshaik0/schema_files/smith__idrp_ksn_attribute_current.schema 
+ -m /home/auto/hshaik0/schema_files/gold__geographic_model_store.schema 
+ -p batchid=158999 -f  /home/auto/hshaik0/final*/the_final_critical_script.pig
+
+ 
+/user/hshaik0/work/items_vend_packs_can_carry
+/user/hshaik0/smith/vend_pack_combined
+/user/hshaik0/work/vend_pack_combined
+/user/hshaik0/smith/eligible_loc
+/staging/eligible_loc
+/user/hshaik0/incoming/eligible_loc
+/user/hshaik0/work/formatted/eligible_loc
+/user/hshaik0/smith/eligible_loc
+/staging/eligible_loc
+/user/hshaik0/work/formatted/eligible_loc
+/user/hshaik0/incoming/shc_item_combined
+/user/hshaik0/smith/shc_item_combined
+/user/hshaik0/work/shc_item_combined
+/user/hshaik0/smith/ksn_attribute/current
+/user/hshaik0/work/ksn_attribute/current
+/user/hshaik0/model_store
+
+SPACE_PLANNING_SG_GDTU100_DTCITEM_LOCATION = /user/hshaik0/SG.GDTU100.DTCITEM
+SMITH__IDRP_VEND_PACK_COMBINED_LOCATION =/user/hshaik0/smith/vend_pack_combined
+SMITH__IDRP_SHC_ITEM_COMBINED_LOCATION = /user/hshaik0/smith/shc_item_combined
+SMITH__IDRP_KSN_ATTRIBUTE_CURRENT_LOCATION = /user/hshaik0/smith/ksn_attribute/current
+WORK__IDRP_ITEMS_VEND_PACKS_CAN_CARRY_LOCATION  = /user/hshaik0/work/items_vend_packs_can_carry
+SPACE_PLANNING_SBT_VEND_PACKS_LOCATION = /user/hshaik0/sbt_vend_packs
+SPACE_PLANNING_SBT_ORD_PT_LOCATION = /user/hshaik0/sbt_ord_pt
+GOLD__GEOGRAPHIC_MODEL_STORE_LOCATION = /user/hshaik0/model_store
+SMITH__IDRP_ELIGIBLE_LOC_LOCATION  = /user/hshaik0/smith/eligible_loc
+SPACE_PLANNING_SBT_LAUNCH_STR_LOCATION  = /user/hshaik0/sbt_launch_str
+SMITH__IDRP_SPACE_PLANNING_AUTHORIZED_VENDOR_PACKAGE_STORES_LOCATION   = /user/hshaik0/deter_output
+
+
+
+ cp /appl/hdidrp/pig/schema/smith__idrp_space_planning_authorized_vendor_package_stores_current.schema .
+ cp /appl/hdidrp/pig/schema/smith__idrp_ksn_attribute_current.schema .
+ cp /appl/hdidrp/pig/schema/item_eligibility/work__idrp_items_vend_packs_can_carry.schema .
+ cp /appl/hdidrp/pig/schema/smith__idrp_vend_pack_combined.schema .
+ cp /appl/hdidrp/pig/schema/smith__idrp_eligible_loc.schema .
+ cp /appl/hdidrp/pig/schema/smith__idrp_shc_item_combined.schema .
+ cp /appl/hdidrp/pig/schema/gold__geographic_model_store.schema .
+ cp /appl/hdidrp/pig/params/item_eligibility/smith__idrp_space_planning_authorized_vendor_package_stores/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.param .
+ 
+ /appl/hdidrp/pig/scripts/item_eligibility/smith__idrp_space_planning_authorized_vendor_package_stores/perform_item_eligibility_smith__idrp_space_planning_authorized_vendor_package_stores.pig
+ 
+ 
+
+hadoop distcp -i hftp://trphadn01/smith/idrp/shc_item_combined/* hdfs://trihadn01/user/hshaik0/smith/vend_pack_combined/
+hadoop distcp -i hftp://trphadn01/smith/idrp/vend_pack_combined/* hdfs://trihadn01/user/hshaik0/vend_pack_combined/
+hadoop distcp -i hftp://trphadn01/work/idrp/items_vend_packs_can_carry/* hdfs://trihadn01/user/hshaik0/work/items_vend_packs_can_carry/
+hadoop distcp -i hftp://trphadn01/smith/space_planning/current/sbt_ord_pt/* hdfs://trihadn01/user/hshaik0/sbt_ord_pt/
+hadoop distcp -i hftp://trphadn01/smith/space_planning/current/sbt_vend_packs/* hdfs://trihadn01/user/hshaik0/sbt_vend_packs/
+hadoop distcp -i hftp://trphadn01/smith/space_planning/current/sbt_launch_str/* hdfs://trihadn01/user/hshaik0/sbt_launch_str/
+hadoop distcp -i hftp://trphadn01/gold/geographic/model_store/* hdfs://trihadn01/user/hshaik0/model_store/
+hadoop distcp -i hftp://trphadn01/smith/idrp/ksn_attribute/current/* hdfs://trihadn01/user/hshaik0/smith/ksn_attribute/current/
+hadoop distcp -i hftp://trphadn01/smith/space_planning/archive/prev_*/SG.GDTU100.DTCITEM/* hdfs://trihadn01/user/hshaik0/SG.GDTU100.DTCITEM/
+hadoop distcp -i hftp://trphadn01/smith/idrp/eligible_loc/* hdfs://trihadn01/user/hshaik0/smith/eligible_loc/ 
+/*Not needed*/
+
+/logs/hdidrp/Hadoop_JDA_Item_Eligibility_Determine_Authorization_Master20190115081622.log
+
+Log File is /logs/hdidrp/Hadoop_JDA_Item_Eligibility_Determine_Authorization_Master20190117080527.log
+
+
+hmkdir -p /user/hshaik0/smith/shc_item_combined/
+hmkdir -p /user/hshaik0/vend_pack_combined/
+hmkdir -p /user/hshaik0/work/items_vend_packs_can_carry/
+hmkdir -p /user/hshaik0/sbt_ord_pt/
+hmkdir -p /user/hshaik0/sbt_vend_packs/
+hmkdir -p /user/hshaik0/sbt_launch_str/
+hmkdir -p /user/hshaik0/model_store/
+hmkdir -p /user/hshaik0/smith/ksn_attribute/current/
+hmkdir -p /user/hshaik0/SG.GDTU100.DTCITEM/
+hmkdir -p /user/hshaik0/smith/eligible_loc/
+
+hcp /smith/idrp/shc_item_combined/* /user/hshaik0/smith/shc_item_combined/ 
+hcp /smith/idrp/vend_pack_combined/* /user/hshaik0/smith/vend_pack_combined/
+hcp /work/idrp/items_vend_packs_can_carry/* /user/hshaik0/work/items_vend_packs_can_carry/ 
+hcp /smith/space_planning/current/sbt_ord_pt/* /user/hshaik0/sbt_ord_pt/  
+hcp /smith/space_planning/current/sbt_vend_packs/* /user/hshaik0/sbt_vend_packs/   
+hcp /smith/space_planning/current/sbt_launch_str/* /user/hshaik0/sbt_launch_str/  
+hcp /gold/geographic/model_store/* /user/hshaik0/model_store/  
+hcp /smith/idrp/ksn_attribute/current/* /user/hshaik0/smith/ksn_attribute/current/  
+hcp /smith/space_planning/archive/prev_*/SG.GDTU100.DTCITEM/* /user/hshaik0/SG.GDTU100.DTCITEM/
+hcp /smith/idrp/eligible_loc/* /user/hshaik0/smith/eligible_loc/
+
+
+hcat /user/hshaik0/smith/shc_item_combined/* | wc -l
+hcat /user/hshaik0/smith/vend_pack_combined/* |wc -l
+hcat /user/hshaik0/work/items_vend_packs_can_carry/* | wc -l
+hcat /user/hshaik0/sbt_ord_pt/* | wc -l
+hcat /user/hshaik0/sbt_vend_packs/* |wc -l
+hcat /user/hshaik0/sbt_launch_str/* | wc -l
+hcat /user/hshaik0/model_store/* | wc -l
+hcat /user/hshaik0/smith/ksn_attribute/current/* | wc -l
+hcat /user/hshaik0/SG.GDTU100.DTCITEM/* |wc -l
+hcat /user/hshaik0/smith/eligible_loc/* |wc -l
+
+production_data:
+
+INFO  17-01 08:47:39,287 - Shell_Trigger - (stderr) Successfully read 907311746 records (51965246493 bytes) from: "/smith/space_planning/archive/prev_*/SG.GDTU100.DTCITEM"
+INFO  17-01 08:47:39,287 - Shell_Trigger - (stderr) Successfully read 165382 records (41721907 bytes) from: "/smith/idrp/eligible_loc"
+INFO  17-01 08:47:39,287 - Shell_Trigger - (stderr) Successfully read 8215723 records from: "/smith/idrp/shc_item_combined"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 11120176 records (8736195216 bytes) from: "/smith/idrp/vend_pack_combined"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 2001702 records (875580070 bytes) from: "/work/idrp/items_vend_packs_can_carry"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 464 records (24509 bytes) from: "/smith/space_planning/current/sbt_ord_pt"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 229280 records (12833311 bytes) from: "/smith/space_planning/current/sbt_vend_packs"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 298203 records (12175193 bytes) from: "/smith/space_planning/current/sbt_launch_str"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 33024621 records from: "/gold/geographic/model_store"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully read 3058380 records from: "/smith/idrp/ksn_attribute/current"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr)
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Output(s):
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr) Successfully stored 345585883 records (32115128111 bytes) in: "/smith/idrp/space_planning_vendor_package_stores/current"
+INFO  17-01 08:47:39,288 - Shell_Trigger - (stderr)
+
+
+My Data has matched:-
+set should be small  very imp************************************
+sh /appl/common/scripts/diff_tool/diff_tool.sh -ip1 "/smith/idrp/space_planning_vendor_package_stores/current" -l1 "\u0001" -c "1s,2s,3s,4s,5s,6s,7s,8s,9s,10s,11s,12s,13s,14s,15s,16s,17s" -ip2 "/user/hshaik0/the_final_critical_script" -l2 "\u0001" -op  "/user/hshaik0/optimize"
+
+019-01-17 08:10:34^A 	1195868^A	 7840^A 	 0^A 	365^A	 1^A	 1^A 	1^A			 1^A 		1^A  ^A		 27^A	 71^A 	2018-12-14^A	 2018-12-14^A	 0^A 	0^A 	1195868^A
+1,2,3,4,5,6,7,8,9,10,11,12,15,16,17
+
+
+error:-
+Check for sort factor
+
+
+final_test1.pig
+Script Name	Optimize Parameters 
+the_original.sh	
+sample_test4	"SET pig.tmpfilecompression.codec com.hadoop.compression.lzo.LzopCodec
+check it should before compress or after"
+sample_test1	"Without Setting SET mapred.max.split.size 134217728
+--SET pig.maxCombinedSplitSize 4000000"
+sample_test2	rev_dtc_file11          
+sample_test3	Setting mappers
+sample_test5	"Without parameter 
+--SET mapreduce.map.java.opts: -Xmx3072m
+--SET mapreduce.reduce.java.opts: -Xmx6144m  
+
+
+
+"
+sample_test6	input_join with replicated  keyword
+sample_test7	Testing  sbt_vend_join1,sbt_ord_join1 with bracket to Key
+sample_test8	"filtered_vend_packs = FILTER smith__idrp_vend_pack_combined_data  
+by (TRIM(ksn_purchase_status_cd) != 'U') ;"
+sample_test9	store_num_join
+sample_test10	mdl_op1_kns_attr_join
+sample_test11	Adding Parallel to Union test_data_1234
+sample_test	Adding Parallel to Union test_data_1234
+sample_test12	join2    

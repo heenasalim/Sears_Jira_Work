@@ -1,0 +1,493 @@
+Changed Files:-
+Pkj_Perform_OutBound_Sqoop_objects.kjb
+Pkj_Hadoop_MI_Pre_Master.kjb
+
+
+
+DP-00-MI-MSTR & DP-00-MI_PRE_MSTR
+
+Pre-MI things
+
+Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly       done
+Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly        done 
+Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly done 
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weekly done 
+Shell_Perform_Sqoop_Deal_Management_Weekly               done
+Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly        done 
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly   done 
+Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly      done 
+
+Remove Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly for whole above jobs 
+            done 
+Shell_Perform_Deal_Management_Weekly_Pre             this is there on main screen
+==================================================================================================
+The following events should be remaining after changes 
+
+Pkj_Hadoop_ksn_locn_hist
+Pkj_Perform_OutBound_Scoop
+Shell_Perform_ksn_locn_hist_pre_part4
+Shell_Perform_ksn_locn_hist_pre_part1
+Shell_Perform_ksn_locn_hist_pre_part3
+Shell_Perform_ksn_locn_hist_pre_part2
+Pkj_Perform_OutBound_Scoop_UDT_VEHICLE_TYPE_Weekly
+Pkj_Perform_OutBound_Scoop_UDT_DEAL_TYPE_Weekly
+Shell_Perform_Generic_Shell_Script_IMPACT_Weekly_Pre
+Shell_Perform_ksn_locn_hist_intermediate             
+
+Following events should be deleted 
+
+Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly===
+Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly done  **
+Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly  done  **
+Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly done  **
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weekly done **
+Shell_Perform_Sqoop_Deal_Management_Weekly               done  **
+Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly        done **
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly   done  **
+Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly      done **
+Shell_Perform_Deal_Management_Weekly_Pre            from main screen 
+
+
+SATURDAYS RUN
+
+Pkj_Hadoop_ksn_locn_hist
+Pkj_Perform_OutBound_Scoop
+Shell_Perform_ksn_locn_hist_pre_part3
+Pkj_Perform_OutBound_Scoop_UDT_VEHICLE_TYPE_Weekly
+Shell_Perform_ksn_locn_hist_pre_part4
+Shell_Perform_ksn_locn_hist_pre_part1
+Pkj_Perform_OutBound_Scoop_UDT_DEAL_TYPE_Weekly
+Shell_Perform_ksn_locn_hist_pre_part2
+Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weekly
+Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly
+Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly
+Shell_Perform_Sqoop_Deal_Management_Weekly
+Shell_Perform_ksn_locn_hist_intermediate
+Shell_Perform_Deal_Management_Weekly_Pre
+Shell_Perform_Generic_Shell_Script_IMPACT_Weekly_Pre
+Trn_BatchControl_GenericCloseInitBatch
+
+
+WEEKDAY RUN 
+Pkj_Perform_OutBound_Scoop
+Pkj_Hadoop_ksn_locn_hist
+Pkj_Perform_OutBound_Scoop_UDT_DEAL_TYPE_Weekly
+Pkj_Perform_OutBound_Scoop_UDT_VEHICLE_TYPE_Weekly
+Shell_Perform_ksn_locn_hist_pre_part3
+Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly
+Shell_Perform_ksn_locn_hist_pre_part2
+Shell_Perform_ksn_locn_hist_pre_part1
+Shell_Perform_ksn_locn_hist_pre_part4
+Shell_Perform_Sqoop_Deal_Management_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly
+Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly
+Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weeklys
+Shell_Perform_ksn_locn_hist_intermediate
+Shell_Perform_Deal_Management_Weekly_Pre
+Shell_Perform_Generic_Shell_Script_IMPACT_Weekly_Pre
+Trn_BatchControl_GenericCloseInitBatch
+==================================================================================================================================
+
+hadoop distcp hdfs://trphadn01/gold/marketing/promotional/imp_offer/history /gold/marketing/promotional/imp_offer/
+
+hadoop distcp hdfs://trphadn01/smith/idrp/udt_vehicle_type_source /smith/idrp/
+hadoop distcp hdfs://trphadn01/smith/idrp/deal_hierarchy_element /smith/idrp/
+hadoop distcp hdfs://trphadn01/smith/idrp/deal_identification /smith/idrp/
+hadoop distcp hdfs://trphadn01/incoming/idrp/promohist/work__idrp_pmi_market_store /smith/idrp/pro]ohist
+hadoop distcp hdfs://trphadn01/smith/idrp/udt_deal_type_source /smith/idrp/
+hadoop distcp hdfs://trphadn01/smith/idrp/deal_market_variation /smith/idrp/
+hadoop distcp hdfs://trphadn01/work/idrp//item_eligibility/item_current/stage4 /work/idrp//item_eligibility/item_current/
+hadoop distcp hdfs://trphadn01/incoming/idrp/promohist/work__idrp_pmi_market  /incoming/idrp/promohist/
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/work_ksn_locn_mi_intermediate /work/idrp/promohist
+hadoop distcp hdfs://trphadn01/incoming/idrp/promohist/work__idrp_pmi_market_store /smith/idrp/promohist 
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/AdPlan/weekly/Item_Level /work/idrp/promohist/AdPlan/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/mktginstrumentval_advpos/* /work/idrp/promohist/
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/deal_management/int/weekly /work/idrp/promohist/deal_management/int
+hadoop distcp hdfs://trphadn01/smith/idrp/dmdpostdate  /smith/idrp
+hadoop distcp hdfs://trphadn01/smith/idrp/kmart_advpos_promo_hist /smith/idrp
+hadoop distcp hdfs://trphadn01/smith/idrp/kmart_advpos_promo_hist_ksn    /smith/idrp                                        
+hadoop distcp hdfs://trphadn01/incoming/idrp/promohist/pmi_range_types  /smith/idrp
+hadoop distcp hdfs://trphadn01/smith/idrp/Collect_Copy_MI/adplan_plan_detail  /smith/idrp
+hadoop distcp hdfs://trphadn01/smith/idrp/sales_history/	 /smith/idrp
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/mktginstrumentval_advpos  /work/idrp/promohist
+hadoop distcp hdfs://trphadn01/incoming/idrp/promohist /incoming/idrp/
+hadoop distcp hdfs://trphadn01/smith/idrp/sears_merchandise_hierarchy /smith/idrp/
+hadoop distcp hdfs://trphadn01/smith/idrp/eligible_loc  /smith/idrp
+hadoop distcp hdfs://trphadn01/smith/item/hierarchy/current  /smith/item/hierarchy
+hadoop distcp hdfs://trphadn01/work/idrp/promohist /work/idrp/
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/deal_management/int/weekly/deal_mgmt_output /work/idrp/promohist/deal_management/int/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/mktginstrumentval_advpos/weekly/advpos_output /work/idrp/promohist/mktginstrumentval_advpos/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/LPub/weekly/LPub_Output /work/idrp/promohist/LPub/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/AdPlan/weekly/AdPlan_Output /work/idrp/promohist/AdPlan/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output /work/idrp/promohist/mktginstrumentval_impact/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre /work/idrp/promohist/mktginstrumentval_impact/weekly
+hadoop distcp hdfs://trphadn01/work/idrp/promohist/work_ksn_locn_mi_intermediate/* /work/idrp/promohist/work_ksn_locn_mi_intermediate/
+hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/promohist/work_ksn_locn_mi_intermediate /work/idrp/promohist/
+hcat /work/idrp/promohist/work_ksn_locn_mi_intermediate/*/* |wc -l
+
+
+
+
+
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/imp_offer/history /gold/marketing/promotional/imp_offer
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/work/idrp/promohist/work_ksn_locn_mi_intermediate/ksn_locn_mi_intermediate_final /work/idrp/promohist/work_ksn_locn_mi_intermediate
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/udt_deal_type_source /smith/idrp
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/smith/idrp/udt_vehicle_type_source /smith/idrp
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/activity/current /gold/marketing/promotional/activity
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/offer_ksn_locn/history/ /gold/marketing/promotional/offer_ksn_locn
+
+
+
+hadoop fs -rm -R /gold/marketing/promotional/imp_offer/history/*
+hadoop fs -rm -R /work/idrp/promohist/work_ksn_locn_mi_intermediate/ksn_locn_mi_intermediate_final/*
+hadoop fs -rm -R /smith/idrp/udt_deal_type_source/*
+hadoop fs -rm -R /smith/idrp/udt_vehicle_type_source/*
+hadoop fs -rm -R /gold/marketing/promotional/activity/current/*
+hadoop fs -rm -R /gold/marketing/promotional/offer_ksn_locn/history/* 
+
+
+
+                                                                  OR 
+2: /appl/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh promohist Pkj_Hadoop_MI_Master.kjb /appl/conf/hdidrp/dev 2>&1 > heena_mi.txt
+scp  hshaik0@trphada03.hadoop.searshc.com:/dprp/idrppsa/data hshaik0@trihadap01.vm.searshc.com:/dprp/idrpnpa/data 
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/pmi_range_types.txt    hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/kmart_advpos_promo_hist_ksn.txt   hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/work__idrp_pmi_market_store.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/work__idrp_pmi_market.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/kmart_advpos_promo_hist.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/kmart_advpos_promo_hist_ksn.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/kmart_advpos_promo_hist_ksn_locn.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+scp hshaik0@trphada04.hadoop.searshc.com:/staging/hdidrp/work__idrp_pmi_market.txt  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/
+
+pig -Dudf.import.list=com.searshc.supplychain.idrp.udf -m /appl/conf/hdidrp/dev/USER.cfg -m /appl/conf/hdidrp/dev/PROJECT.cfg -m /appl/hdidrp/idrpnpc/hdidrp/pig/params/promohist/Perform_Impact_Weekly_Pre.param -m /appl/hdidrp/idrpnpc/hdidrp/pig/schema/gold__marketing_promotional_history_activity.schema -m /appl/hdidrp/idrpnpc/hdidrp/pig/schema/gold__marketing_promotional_history_imp_offer_history.schema -m /appl/hdidrp/idrpnpc/hdidrp/pig/schema/promohist/work_idrp_mi_history_offer_ksn_locn_history_intermediate.schema -m /appl/hdidrp/idrpnpc/hdidrp/pig/schema/udt_deal_type.schema -m /appl/hdidrp/idrpnpc/hdidrp/pig/schema/udt_vehicle_type.schema -p dmdpostdate=2019-10-13 2019-11-20 /appl/hdidrp/idrpnpc/hdidrp/pig/scripts/promohist/Perform_Impact_Weekly_Pre.pig
+
+Changed Files:-
+
+Pkj_Hadoop_MI_Pre_Master.kjb   
+Pkj_Perform_OutBound_Sqoop_objects.kjb    removed ADVPOS 
+Pkj_Shell_Perform_Sqoop_FastLoad_Weekly.kjb  deleted the events from the package x		
+
+chmod 777 /appl/hdidrp/idrpnpc/hdidrp/kettle/promohist/*
+
+vi /home/auto/hdidrp/heena_pre.txt
+Done with Pre-Mi master 
+
+INFO  15-12 14:10:53,540 - Shell_Perform_Generic_Shell_Script_IMPACT_Weekly_Pre - (stderr) Successfully stored 8216710 records (640905911 bytes) in: "/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre"
+
+
+1.why we get 0 records in "/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre"
+2. send logs to Pauline for bothe the jobs with modifications.
+
+select * from stgmgr.job j, stgmgr.job_interface ji, stgmgr.batchctl b
+where j.job_name='Pkj_Hadoop_MI_Pre_Master'
+and j.job_interface_id=ji.job_interface_id
+and ji.job_interface_id=b.job_interface_id
+order by batchctl_id desc;
+
+select je.event_name,
+       jea.job_event_activity_id,
+       to_char(jea.create_ts, 'yyyy-mm-dd hh24:mi:ss'),
+       to_char(jea.update_ts, 'yyyy-mm-dd hh24:mi:ss'),
+       jes.description
+  from stgmgr.job_event          je,
+       STGMGR.job_event_activity jea,
+       stgmgr.job                j,
+       stgmgr.job_event_status   jes,
+       stgmgr.job_interface      ji
+ where j.job_name = 'Pkj_Hadoop_MI_Pre_Master'
+   and j.job_interface_id = ji.job_interface_id
+   and jea.job_id = j.job_id
+   and jea.batchctl_id = '7174'
+   and je.job_event_id = jea.job_event_id
+   and jea.job_event_status_id = jes.job_event_status_id
+ order by 2 asc, 3; 
+
+  DELETE FROM stgmgr.job_event_activity WHERE batchctl_id in ('7195');
+  commit;
+  DELETE FROM stgmgr.job_event_activity WHERE batchctl_id in ('7184','7185','7186','7187','7188','7189');
+  commit;
+ 
+Update stgmgr.job_event_activity
+set job_event_status_id = 3
+where batchctl_id in ('7141','7142','7143','7144','7145','7146','7140','7139','7138','7133','7134','7131','7132','7130','7129','7128','7127','7126','7125','7124','7123','7122','7121','7120','7117','7114','7113','7112','7111','6094','6027','2819','2817','2403','2399','2398','2397','2395','2371','2358','2344','2343','2342','2341','2340','2321'
+,'7154','7165','7166','7167','7168','7169','7170','7171','7173','7174','7175','7176','7177','7178','7179','7180','7181',
+'7153',
+'7152',
+'7151',
+'7150',
+'7149',
+'7148',
+'7147');
+
+ 
+/smith/idrp/Collect_Copy_MI/adplan_plan_detail
+ 
+
+gold_importing.sh
+
+. ~/.bashrc
+rm /staging/hdidrp/dprp/archive/idrpnp*/*
+cp /home/auto/pslovic/UDT_* /dprp/idrpnpa/data
+cp /home/auto/pslovic/UDT_* /dprp/idrpnpb/data
+cp /home/auto/pslovic/UDT_* /dprp/idrpnpc/data
+cp /home/auto/pslovic/UDT_* /dprp/idrpnpd/data
+export SCRIPT_NAME_PROJECT=PROJECT.cfg_BKP_HEENA_03DEC19
+
+/appl/hdidrp/idrpnpc/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh promohist Pkj_Hadoop_MI_Pre_Master.kjb /appl/conf/hdidrp/dev  
+
+
+ORIGINAL RUN - /logs/hdidrp/Hadoop_MI_Pre_Master20191121070116.log
+
+dev /appl/hdidrp/idrpnpc/hdidrp/kettle/promohist/*
+/appl/hdidrp/kettle/promohist/*
+ 
+ dev /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/*
+ /appl/hdidrp/bin/promohist/*
+  
+
+dev  /appl/hdidrp/idrpnpc/hdidrp/bin/shared/utility_functions
+ /appl/hdidrp/bin/shared/utility_functions
+ 
+
+ find . -name '/dprp/idrpnpc/data/UDT_VEHICLE_TYPE20191119140006.dat' -exec mv -t  '/staging/hdidrp/dprp/archive/idrpnpc' {} +;
+
+ 
+ find  /staging/hdidrp/dprp/archive/idrpnpc -type d -exec tar cvzf UDT*.tar.gz {} \;
+ 
+ 
+ scp /dprp/idrpnpc/data/UDT_VEHICLE_TYPE20191119140006.dat  hshaik0@trihadap01.vm.searshc.com:/staging/hdidrp/dprp/archive/idrpnpc
+ 
+ find / -iname "/dprp/idrpnpc/data/UDT_VEHICLE_TYPE*" -exec mv {}  "/staging/hdidrp/dprp/archive/idrpnpc" \;
+ 
+ 
+
+hadoop distcp hdfs://trphadn01/gold/marketing/promotional/imp_offer/history /gold/marketing/promotional/imp_offer
+hadoop distcp hdfs://trphadn01//smith/idrp/udt_deal_type_source /smith/idrp/
+hadoop distcp hdfs://trphadn01//smith/idrp/udt_vehicle_type_source /smith/idrp/
+hadoop distcp hdfs://trphadn01//gold/marketing/promotional/activity/current /gold/marketing/promotional/activity
+hadoop distcp hdfs://trphadn01//work/idrp/promohist/work_ksn_locn_mi_intermediate /work/idrp/promohist
+
+hadoop distcp hdfs://trphadn01/smith/idrp/Collect_Copy_MI/adplan_plan_detail /smith/idrp/Collect_Copy_MI
+
+
+	
+hcat /smith/idrp/udt_deal_type_source/* |wc -l
+hcat /smith/idrp/udt_vehicle_type_source/*  |wc -l
+ll /logs/hdidrp/Hadoop_MI_Pre_Master20191211060221.log
+hcat /gold/marketing/promotional/activity/current/* |wc -l 
+hcat /gold/marketing/promotional/imp_offer/history/* |wc -l
+hcat /work/idrp/promohist/work_ksn_locn_mi_intermediate/*/*|wc -l
+
+
+CHECK "/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre" FILE OUTPUT 
+
+
+-m /appl/hdidrp/pig/params/promohist/Perform_Impact_Weekly_Pre.param -m /appl/hdidrp/pig/schema/gold__marketing_promotional_history_activity.schema -m /appl/hdidrp/pig/schema/gold__marketing_promotional_history_imp_offer_history.schema -m /appl/hdidrp/pig/schema/promohist/work_idrp_mi_history_offer_ksn_locn_history_intermediate.schema -m /appl/hdidrp/pig/schema/udt_deal_type.schema -m /appl/hdidrp/pig/schema/udt_vehicle_type.schema -p dmdpostdate=2019-12-29 
+/appl/hdidrp/pig/scripts/promohist/Perform_Impact_Weekly_Pre.pig
+
+/appl/hdidrp/bin/promohist/Perform_Impact_Weekly_Pre.sh 279999 /appl/conf/hdidrp/prod promohist
+
+
+/user/hshaik0/impact_output_pre_heena_output
+
+OUTPUT COUNT - 1982934
+
+ /logs/hdidrp/Hadoop_MI_Pre_Master20191211005224.log,
+dev  /appl/hdidrp/idrpnpc/kettle/bin/shared/*
+ /appl/hdidrp/kettle/shared/*
+  
+ /appl/hdidrp/idrpnpc/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh
+ /appl/hdidrp/idrpnpc/hdidrp/bin/PerformOutBoundLoad.sh   S
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/MI_TeradataImport.sh   
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_DM_Core_DB2_Sqoop.sh 
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_DM_Sears_Sqoop.sh  
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_ksn_locn_hist_intermediate.sh  
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_ksn_locn_hist_pre_part1.sh   /
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_ksn_locn_hist_pre_part2.sh  
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_ksn_locn_hist_pre_part3.sh 
+ /appl/hdidrp/idrpnpc/hdidrp/bin/promohist/Perform_ksn_locn_hist_pre_part4.sh  
+ 
+ 
+ drop table weekly_impact_output_pre_modified;
+ create external table weekly_impact_output_pre_modified (KSN_ID String,PROMOTION_START_DT String,PROMOTION_END_DT  String,MARKETING_INSTRUMENT_NM  String,MARKETING_INSTRUMENT_ATTRIBUTE_NM  String,MARKETING_INSTRUMENT_VALUE_CD  String,SOURCE_SYSTEM_NM  String,MARKETING_INSTRUMENT_TYPE_CD  String,PROMOTION_NM  String,SHC_LOCATION_NBR  String)
+ row format delimited
+ fields terminated by '|'
+ location '/work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre';
+ 
+ drop table weekly_impact_output_pre_original;
+ create external table weekly_impact_output_pre_original (KSN_ID String,PROMOTION_START_DT String,PROMOTION_END_DT  String,MARKETING_INSTRUMENT_NM  String,MARKETING_INSTRUMENT_ATTRIBUTE_NM  String,MARKETING_INSTRUMENT_VALUE_CD  String,SOURCE_SYSTEM_NM  String,MARKETING_INSTRUMENT_TYPE_CD  String,PROMOTION_NM  String,SHC_LOCATION_NBR  String)
+ row format delimited
+ fields terminated by '|'
+ location '/user/hshaik0/weekly_impact_original_run_output';
+ 
+ Original table data loaded
+ now copying modified test data
+
+ 
+ 
+ 
+ 
+ find . -name "test.txt" -exec mv '{}' "${target_linux_dir}" \;
+
+find . -name "test.txt" | mv /home/auto/hdidrp/chandra_kettle/
+
+find . -name 'test.txt' -exec mv -t /home/auto/hdidrp/chandra_kettle/ {} + "\;"
+
+
+find . -name 'test.txt' -exec mv /home/auto/hdidrp/chandra_kettle/ {} + '\';
+
+
+
+find /home/auto/hdidrp -name test.txt -exec cp {}  /home/auto/hdidrp/chandra_kettle/ \;
+
+
+find /home/auto/hdidrp -name test.txt -exec mv {}  /home/auto/hdidrp/chandra_kettle/ \;
+
+
+******************************************************************
+*  SCRIPT TERMINATING
+*  SCRIPT    /appl/hdidrp/idrpnpc/hdidrp/bin/HadoopBatchMasterJobLoadGeneric.sh promohist Pkj_Hadoop_MI_Pre_Master.kjb /appl/conf/hdidrp/dev
+*  DATE:     12/10/19-05:35:40
+*  ENV:
+*  DURATION: 0 Days, 0 Hours, 20 Minutes, 1 Seconds
+*  STATUS:   SUCCESS
+*****************************************************************
+
+
+
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/imp_offer/history /gold/marketing/promotional/imp_offer
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/activity/current /gold/marketing/promotional/activity
+	hadoop distcp hdfs://trphadn01.hadoop.searshc.com/gold/marketing/promotional/offer_ksn_locn/history c
+
+	
+	
+	original run data :-  /user/hshaik0/weekly_impact_original_run_output  63298640
+	modified run data :- /work/idrp/promohist/mktginstrumentval_impact/weekly/impact_output_pre
+	
+	
+	
+	original output stored in /user/hshaik0  fro mi _mstr job:-
+hcp "/work/idrp/promohist/mktginstrumentval_advpos/weekly/advpos_output" /user/hshaik0/weekly_advpos_output
+hcp "/work/idrp/promohist/history_promotion_marketing_instrument_value" /user/hshaik0/history_promotion_marketing_instrument_value
+hcp "/work/idrp/promohist/mktginstrumentval/PC_Weekly/loadreadyfile" /user/hshaik0/PC_Weekly_loadreadyfile
+hcp "/work/idrp/promohist/AdPlan/weekly/merge_output" /user/hshaik0/AdPlan_weekly_merge_output
+hcp "/work/idrp/promohist/mktginstrumentval_impact/weekly/merge_output" /user/hshaik0/impact_weekly_merge_output
+hcp "/work/idrp/promohist/mktginstrumentval_advpos/weekly/merge_output" /user/hshaik0/advpos_weekly_merge_output
+hcp "/work/idrp/promohist/deal_management/int/weekly/loadreadyfile" /user/hshaik0/int_weekly_loadreadyfile
+hcp "/work/idrp/promohist/LPub/weekly/loadreadyfile" /user/hshaik0/Lpub_weekly_loadreadyfile
+
+
+ "/work/idrp/promohist/mktginstrumentval_advpos/weekly/advpos_output" 
+ "/work/idrp/promohist/history_promotion_marketing_instrument_value" 
+ "/work/idrp/promohist/mktginstrumentval/PC_Weekly/loadreadyfile" 
+ "/work/idrp/promohist/AdPlan/weekly/merge_output"
+ "/work/idrp/promohist/mktginstrumentval_impact/weekly/merge_output"
+ "/work/idrp/promohist/mktginstrumentval_advpos/weekly/merge_output" 
+ "/work/idrp/promohist/deal_management/int/weekly/loadreadyfile"
+ "/work/idrp/promohist/LPub/weekly/loadreadyfile" 
+ 
+Perform_Impact_Weekly_Pre.sh 27909 /appl/conf/hdidrp/prod promohist
+ 
+ 
+Successfully stored 978 records (40098 bytes) in: "/user/hshaik0/FILTER_3"
+Successfully stored 23 records (870 bytes) in: "/user/hshaik0/FILTER_1"
+Successfully stored 0 records in: "/user/hshaik0/UNION_VEHICLE_DEAL"
+
+
+JOINSET_IMP_OFFER_KSN_LOCN
+JOINSET_3
+JOINSET_02
+FILTER_3 
+UNION_VEHICLE_DEAL
+
+
+encies first then parent or disable constraint.
+15,795 rows deleted.
+15,795 rows deleted.
+23 rows deleted.
+
+
+drwxrwxrwx  3 hdidrp hdp-idrp   4096 Dec  3 16:29 data no need
+drwxrwxrwx  2 hdidrp hdp-idrp   4096 Nov 21  2013 ddl no need 
+drwxrwxrwx  2 hdidrp hdp-idrp  40960 Jun  9  2016 log no need 
+drwxrwxrwx  3 hdidrp hdp-idrp   4096 Nov 21  2013 mainframe  no need 
+lrwxrwxrwx  1 hdidrp hdp-idrp     35 Mar 10  2014 staging -> /logs/hdidrp/idrpnpc/hdidrp/staging  no need 
+drwxrwxrwx  2 hdidrp hdp-idrp   8192 May  1  2015 tmp no need 
+
+drwxrwxrwx  2 hdidrp hdp-idrp   4096 Jul  9  2019 etc  create shared folder
+drwxrwxrwx  3 hdidrp hdp-idrp   4096 Apr 10  2017 lib create shared folder
+drwxrwxrwx 23 hdidrp hdp-idrp   4096 Dec 13 11:08 sql create shared folder
+	
+drwxrwxrwx 83 hdidrp hdp-idrp   8192 Dec 19 00:45 kettle
+drwxrwxrwx  5 hdidrp hdp-idrp   4096 Sep 25  2018 pig
+
+drwxrwxrwx 98 hdidrp hdp-idrp  20480 Dec 16 04:57 bin
+-rwxrwxr-x  1 hdidrp hdp-idrp 269731 Aug  2  2017 kettle.idrpnpc no need 
+
+
+
+
+CREATE TABLE STGMGR.JOB_EVENT_22_01_2020 AS SELECT * FROM stgmgr.job_event;
+
+CREATE TABLE STGMGR.JOB_EVENT_ACTIVITY_22_01_2020 AS SELECT * FROM stgmgr.job_event_activity;
+
+Delete from stgmgr.job_event where job_event_id in ('2551','2191','1850','1866','3678','1860',
+'3667','3676','1856','3679','1861','3675','1855','3669','1842','3681','1867','3680','1864','2570','3673','3674','1852');
+
+
+
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Ad-Plan_Weekly%';  
+
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Lpub_Weekly%';   
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Generic_Shell_Script_ADVPOS_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Generic_Shell_Script_Deal_Management_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Deal_Management_Weekly_Pre%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly%';  
+
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly%';
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Sqoop_Deal_Management_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weekly%';
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly%'; 
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly%';
+select * from stgmgr.job_event WHERE event_name like '%Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly%'; 
+
+Delete from stgmgr.job_event where job_event_id in ('1437','2092',
+'1436','2091',
+'1450','2099',
+'1453','2100',
+'1426','2089',
+'1441','2093',
+'1447','2098',
+'1442','2095',
+'2087',
+'1446','2097',
+'1452','1434',
+'1415','1417');
+
+
+
+Shell_Perform_Ad-Plan_Weekly  
+Shell_Perform_Lpub_Weekly   
+Shell_Perform_Generic_Shell_Script_ADVPOS_Weekly 
+Shell_Perform_Generic_Shell_Script_Deal_Management_Weekly 
+Pkj_Perform_Sqoop_ADVPOS_IMPACT_DealManagement_Weekly 
+Shell_Perform_Deal_Management_Weekly_Pre 
+Shell_Perform_CoreDB2_Sqoop_Deal_Management_Weekly  
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Weekly 
+Shell_Perform_Sqoop_Deal_Management_Weekly 
+Shell_Perform_FastLoad_Teradata_Promo_Hist_KSN_Locn_Weekly
+Shell_Perform_Teradata_FastLoad_PMI_Market_Store_Weekly 
+Shell_Perform_Teradata_FastExport_AD-PLAN_Weekly
+Shell_Perform_FastLoad_Teradata_Promo_Hist_Weekly 
